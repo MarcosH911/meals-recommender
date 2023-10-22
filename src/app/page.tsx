@@ -1,10 +1,11 @@
 // Spoontacular
 
+import WeightForm from "./WeightForm";
+
 function Page() {
   return (
-    <div>
-      <h1>Hello, Marcos</h1>
-      <form></form>
+    <div className="mx-auto max-w-md py-8">
+      <WeightForm />
     </div>
   );
 }
