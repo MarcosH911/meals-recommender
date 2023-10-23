@@ -77,34 +77,34 @@ function WeightInput({
                 </div>
                 <FormDescription>
                   {form.getValues().speed === 1 && (
-                    <p>
+                    <span>
                       <strong>Slow but steady:</strong> Choose this option for a
                       gradual and sustainable weight loss journey.
-                    </p>
+                    </span>
                   )}
                   {form.getValues().speed === 2 && (
-                    <p>
+                    <span>
                       <strong>Steady progress:</strong> Opt for this level to
                       maintain a balanced pace towards your weight loss goals.
-                    </p>
+                    </span>
                   )}
                   {form.getValues().speed === 3 && (
-                    <p>
+                    <span>
                       <strong>Moderate pace:</strong> This option strikes a
                       balance between speed and sustainability.
-                    </p>
+                    </span>
                   )}
                   {form.getValues().speed === 4 && (
-                    <p>
+                    <span>
                       <strong>Accelerated results:</strong> Select this for
                       faster weight loss with commitment and discipline.
-                    </p>
+                    </span>
                   )}
                   {form.getValues().speed === 5 && (
-                    <p>
+                    <span>
                       <strong>Rapid transformation:</strong> For those ready to
                       embrace an intense weight loss journey, choose this level.
-                    </p>
+                    </span>
                   )}
                 </FormDescription>
               </>
@@ -163,13 +163,13 @@ function WeightInput({
         </Button>
         <Button
           onClick={(e) => {
-            name != "speed" && e.preventDefault();
+            if (name !== "speed") e.preventDefault();
             setStep((step) => step + 1);
           }}
-          // disabled={
-          //   (name === "weight" && !form.getValues().weight) ||
-          //   (name === "desiredWeight" && !form.)
-          // }
+          disabled={
+            (name === "weight" && !form.getValues().weight) ||
+            (name === "desiredWeight" && !form.getValues().desiredWeight)
+          }
         >
           {name === "speed" ? "Submit" : "Next"}
         </Button>
