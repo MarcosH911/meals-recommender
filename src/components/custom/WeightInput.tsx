@@ -1,46 +1,93 @@
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+import { twMerge } from "tailwind-merge";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+
+import { Slider } from "../ui/slider";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-
-import type { UseFormReturn } from "react-hook-form";
-import { useState } from "react";
-import { Slider } from "../ui/slider";
-import { twMerge } from "tailwind-merge";
+import { Label } from "../ui/label";
 
 interface Props {
-  form: UseFormReturn<
-    {
-      weight: number;
-      desiredWeight: number;
-      speed: number;
-    },
-    any,
-    undefined
-  >;
   name: "weight" | "desiredWeight" | "speed";
   label: string;
   placeholder?: { kg: string; lb: string };
   description?: string;
+  formValues: { weight: string; desiredWeight: string; speed: string };
+  setFormValues: React.Dispatch<
+    React.SetStateAction<{
+      weight: string;
+      desiredWeight: string;
+      speed: string;
+    }>
+  >;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  formRef: React.RefObject<HTMLFormElement>;
 }
 
 function WeightInput({
-  form,
   name,
   label,
   placeholder,
   description,
+  formValues,
+  setFormValues,
   setStep,
+  formRef,
 }: Props) {
   const [units, setUnits] = useState<"lb" | "kg">("lb");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleNextStep = useCallback(
+    (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      if (e) e.preventDefault();
+      setErrorMessage("");
+
+      if (name === "speed") {
+        formRef.current?.submit();
+      }
+
+      if (
+        name === "weight" &&
+        (Number(formValues.weight) < 1 || Number(formValues.weight) > 999)
+      ) {
+        setErrorMessage("Weight must be between 1 and 999.");
+        return;
+      }
+
+      if (
+        name === "desiredWeight" &&
+        (Number(formValues.desiredWeight) < 1 ||
+          Number(formValues.desiredWeight) > 999)
+      ) {
+        setErrorMessage("Desired weight must be between 0 and 999.");
+        return;
+      }
+
+      if (
+        name === "desiredWeight" &&
+        Number(formValues.desiredWeight) > Number(formValues.weight)
+      ) {
+        setErrorMessage("Desired weight must be lower than current weight.");
+        return;
+      }
+
+      setStep((step) => step + 1);
+    },
+    [formRef, formValues.desiredWeight, formValues.weight, name, setStep]
+  );
+
+  useEffect(() => {
+    const handleEnter = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        handleNextStep();
+      }
+    };
+
+    window.addEventListener("keydown", handleEnter);
+
+    return () => window.removeEventListener("keydown", handleEnter);
+  }, [handleNextStep]);
 
   return (
     <motion.div
@@ -49,129 +96,136 @@ function WeightInput({
       exit={{ y: -10, opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <FormField
-        control={form.control}
-        name={name}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="text-3xl font-medium">{label}</FormLabel>
-            {name === "speed" ? (
-              <>
-                <div className="h-2"></div>
-                <FormControl>
-                  <Slider
-                    defaultValue={[1]}
-                    min={1}
-                    max={5}
-                    step={1}
-                    className="cursor-pointer"
-                    onValueChange={([value]) => form.setValue("speed", value)}
-                  />
-                </FormControl>
-                <div className="pt-1 pb-2 flex justify-between px-1.5">
-                  {Array(5)
-                    .fill(true)
-                    .map((_, i) => (
-                      <p key={i}>{i + 1}</p>
-                    ))}
-                </div>
-                <FormDescription>
-                  {form.getValues().speed === 1 && (
-                    <span>
-                      <strong>Slow but steady:</strong> Choose this option for a
-                      gradual and sustainable weight loss journey.
-                    </span>
-                  )}
-                  {form.getValues().speed === 2 && (
-                    <span>
-                      <strong>Steady progress:</strong> Opt for this level to
-                      maintain a balanced pace towards your weight loss goals.
-                    </span>
-                  )}
-                  {form.getValues().speed === 3 && (
-                    <span>
-                      <strong>Moderate pace:</strong> This option strikes a
-                      balance between speed and sustainability.
-                    </span>
-                  )}
-                  {form.getValues().speed === 4 && (
-                    <span>
-                      <strong>Accelerated results:</strong> Select this for
-                      faster weight loss with commitment and discipline.
-                    </span>
-                  )}
-                  {form.getValues().speed === 5 && (
-                    <span>
-                      <strong>Rapid transformation:</strong> For those ready to
-                      embrace an intense weight loss journey, choose this level.
-                    </span>
-                  )}
-                </FormDescription>
-              </>
-            ) : (
-              <>
-                <div className="py-2 flex gap-2">
-                  <Button
-                    variant={units === "lb" ? "secondary" : "ghost"}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setUnits("lb");
-                    }}
-                  >
-                    lb
-                  </Button>
-                  <Button
-                    variant={units === "kg" ? "secondary" : "ghost"}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setUnits("kg");
-                    }}
-                  >
-                    kg
-                  </Button>
-                </div>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder={
-                      units === "lb"
-                        ? placeholder && placeholder.lb
-                        : placeholder && placeholder.kg
-                    }
-                    type="number"
-                    min={0}
-                    max={999}
-                    value={field.value ?? ""}
-                  />
-                </FormControl>
-                <FormDescription>{description}</FormDescription>
-                <FormMessage />
-              </>
+      <Label className="text-3xl font-medium">{label}</Label>
+      {name === "speed" ? (
+        <>
+          <Slider
+            autoFocus
+            defaultValue={[1]}
+            min={1}
+            max={5}
+            step={1}
+            className="cursor-pointer mt-6"
+            value={[Number(formValues.speed)]}
+            onValueChange={([value]) =>
+              setFormValues((values) => ({
+                ...values,
+                speed: value.toString(),
+              }))
+            }
+          />
+          <div className="pb-2 pt-3 flex justify-between px-1.5">
+            {Array(5)
+              .fill(true)
+              .map((_, i) => (
+                <p key={i}>{i + 1}</p>
+              ))}
+          </div>
+          <div className="text-sm pt-2 text-slate-500">
+            {formValues.speed === "1" && (
+              <span>
+                <strong>Slow but steady:</strong> Choose this option for a
+                gradual and sustainable weight loss journey.
+              </span>
             )}
-          </FormItem>
-        )}
-      />
+            {formValues.speed === "2" && (
+              <span>
+                <strong>Steady progress:</strong> Opt for this level to maintain
+                a balanced pace towards your weight loss goals.
+              </span>
+            )}
+            {formValues.speed === "3" && (
+              <span>
+                <strong>Moderate pace:</strong> This option strikes a balance
+                between speed and sustainability.
+              </span>
+            )}
+            {formValues.speed === "4" && (
+              <span>
+                <strong>Accelerated results:</strong> Select this for faster
+                weight loss with commitment and discipline.
+              </span>
+            )}
+            {formValues.speed === "5" && (
+              <span>
+                <strong>Rapid transformation:</strong> For those ready to
+                embrace an intense weight loss journey, choose this level.
+              </span>
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="py-4 flex gap-2">
+            <Button
+              variant={units === "lb" ? "secondary" : "ghost"}
+              onClick={(e) => {
+                e.preventDefault();
+                setUnits("lb");
+              }}
+            >
+              lb
+            </Button>
+            <Button
+              variant={units === "kg" ? "secondary" : "ghost"}
+              onClick={(e) => {
+                e.preventDefault();
+                setUnits("kg");
+              }}
+            >
+              kg
+            </Button>
+          </div>
+          <Input
+            autoFocus
+            type="number"
+            min={1}
+            max={999}
+            value={formValues[name]}
+            onChange={(e) =>
+              setFormValues((values) => ({ ...values, [name]: e.target.value }))
+            }
+            placeholder={
+              units === "lb"
+                ? placeholder && placeholder.lb
+                : placeholder && placeholder.kg
+            }
+          />
+          <div className="text-sm pt-2 text-slate-500">{description}</div>
+        </>
+      )}
+      {errorMessage && (
+        <div className="text-sm mt-2 text-red-500 font-medium">
+          {errorMessage}
+        </div>
+      )}
       <div className="flex justify-between items-center mt-6">
         <Button
           onClick={(e) => {
             e.preventDefault();
             setStep((step) => step - 1);
           }}
-          className={twMerge(name === "weight" && "invisible")}
+          className={twMerge(
+            "space-x-1 group",
+            name === "weight" && "invisible"
+          )}
         >
-          Previous
+          <ArrowLeft className="h-5 group-hover:-translate-x-1 transition" />
+          <span>Previous</span>
         </Button>
         <Button
-          onClick={(e) => {
-            if (name !== "speed") e.preventDefault();
-            setStep((step) => step + 1);
-          }}
-          disabled={
-            (name === "weight" && !form.getValues().weight) ||
-            (name === "desiredWeight" && !form.getValues().desiredWeight)
-          }
+          onClick={handleNextStep}
+          disabled={formValues[name] === ""}
+          className={twMerge(
+            "space-x-1 group"
+            // TODO
+            // name === "speed" && "bg-orange-600"
+          )}
         >
-          {name === "speed" ? "Submit" : "Next"}
+          <span>{name === "speed" ? "Submit" : "Next"}</span>
+          {name !== "speed" && (
+            <ArrowRight className="h-5 group-hover:translate-x-1 transition" />
+          )}
         </Button>
       </div>
     </motion.div>
