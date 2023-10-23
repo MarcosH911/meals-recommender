@@ -1,6 +1,6 @@
 // Spoontacular
 
-import WeightForm from "./WeightForm";
+import WeightForm from "../components/custom/weight-form/WeightForm";
 
 function Page() {
   return (

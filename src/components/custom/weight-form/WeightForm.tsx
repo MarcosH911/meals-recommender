@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 import { Progress } from "@/components/ui/progress";
-import WeightInput from "@/components/custom/WeightInput";
+import WeightInput from "@/components/custom/weight-form/WeightInput";
 import WeightFormContext from "@/contexts/WeightFormContext";
 
 const totalSteps = 3;
@@ -23,14 +23,15 @@ function WeightForm() {
 
   return (
     <WeightFormContext.Provider
-      value={{ formValues, setFormValues, totalSteps, step, setStep, formRef }}
+      value={{ formValues, setFormValues, totalSteps, setStep, formRef }}
     >
       <div>
-        <Progress value={step * 25} className="mb-10" />
+        <Progress value={step * (100 / (totalSteps + 1))} className="mb-10" />
         <form onSubmit={handleSubmit} ref={formRef}>
           <AnimatePresence mode="wait">
             {step === 1 && (
               <WeightInput
+                step={1}
                 name="weight"
                 label="What is your current weight?"
                 placeholder={{ kg: "120", lb: "270" }}
@@ -40,6 +41,7 @@ function WeightForm() {
             )}
             {step === 2 && (
               <WeightInput
+                step={2}
                 name="desiredWeight"
                 label="What is your desired weight?"
                 placeholder={{ kg: "75", lb: "170" }}
@@ -49,6 +51,7 @@ function WeightForm() {
             )}
             {step === 3 && (
               <WeightInput
+                step={3}
                 name="speed"
                 label="How fast do you want to achieve your goal?"
               />

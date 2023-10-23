@@ -1,1 +1,3 @@
 Save form values to local storage
+
+Form buttons update too quickly before animation finishes

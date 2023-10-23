@@ -1,7 +1,12 @@
 import { createContext } from "react";
 
 interface WeightFormContextTypes {
-  formValues: { weight: string; desiredWeight: string; speed: string };
+  formValues: {
+    weight: string;
+    desiredWeight: string;
+    speed: string;
+    [key: string]: string;
+  };
   setFormValues: React.Dispatch<
     React.SetStateAction<{
       weight: string;
@@ -10,7 +15,6 @@ interface WeightFormContextTypes {
     }>
   >;
   totalSteps: number;
-  step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   formRef: React.RefObject<HTMLFormElement>;
 }
