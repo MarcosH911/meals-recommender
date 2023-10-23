@@ -101,7 +101,14 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
         />
       )}
       {name === "customizeMeals" && (
-        <WeightInputOptions description={description!} />
+        <WeightInputOptions
+          name="customizeMeals"
+          options={[
+            { text: "Of course!", value: "true" },
+            { text: "Some other time", value: "false" },
+          ]}
+          description={description!}
+        />
       )}
 
       {errorMessage && (

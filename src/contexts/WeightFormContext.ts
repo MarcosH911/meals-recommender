@@ -5,6 +5,7 @@ interface WeightFormContextTypes {
     weight: string;
     desiredWeight: string;
     speed: string;
+    customizeMeals: string;
     [key: string]: string;
   };
   setFormValues: React.Dispatch<
@@ -12,6 +13,7 @@ interface WeightFormContextTypes {
       weight: string;
       desiredWeight: string;
       speed: string;
+      customizeMeals: string;
     }>
   >;
   totalSteps: number;

@@ -15,6 +15,7 @@ function WeightForm() {
     weight: "",
     desiredWeight: "",
     speed: "3",
+    customizeMeals: "",
   });
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -54,13 +55,16 @@ function WeightForm() {
                 step={3}
                 name="speed"
                 label="How fast do you want to achieve your goal?"
+                key={step}
               />
             )}
             {step === 4 && (
               <WeightInput
                 step={4}
                 name="customizeMeals"
-                label="Do you want to customize your meals? (You can do this later)"
+                label="Do you want to customize your meals?"
+                description="You can always change them later."
+                key={step}
               />
             )}
           </AnimatePresence>
