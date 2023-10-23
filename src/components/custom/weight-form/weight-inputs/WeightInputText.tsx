@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WeightFormContext from "@/contexts/WeightFormContext";
+import Description from "@/components/ui/description";
 
 interface Props {
   name: string;
@@ -54,7 +55,7 @@ function WeightInputText({ name, placeholder, description }: Props) {
             : placeholder && placeholder.kg
         }
       />
-      <div className="text-sm pt-2 text-slate-500">{description}</div>
+      <Description>{description}</Description>
     </div>
   );
 }

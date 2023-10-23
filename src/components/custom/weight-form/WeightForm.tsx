@@ -7,7 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import WeightInput from "@/components/custom/weight-form/WeightInput";
 import WeightFormContext from "@/contexts/WeightFormContext";
 
-const totalSteps = 3;
+const totalSteps = 4;
 
 function WeightForm() {
   const [step, setStep] = useState(1);
@@ -54,6 +54,13 @@ function WeightForm() {
                 step={3}
                 name="speed"
                 label="How fast do you want to achieve your goal?"
+              />
+            )}
+            {step === 4 && (
+              <WeightInput
+                step={4}
+                name="customizeMeals"
+                label="Do you want to customize your meals? (You can do this later)"
               />
             )}
           </AnimatePresence>

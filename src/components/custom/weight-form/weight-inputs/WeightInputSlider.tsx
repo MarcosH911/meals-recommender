@@ -1,5 +1,6 @@
 "use client";
 
+import Description from "@/components/ui/description";
 import { Slider } from "@/components/ui/slider";
 import WeightFormContext from "@/contexts/WeightFormContext";
 import { useContext } from "react";
@@ -54,12 +55,10 @@ function WeightInputSlider() {
             <p key={i}>{i + 1}</p>
           ))}
       </div>
-      <div className="text-sm pt-2 text-slate-500">
-        <span>
-          <strong>{descriptions[Number(formValues.speed) - 1].strong}</strong>
-          {descriptions[Number(formValues.speed) - 1].text}
-        </span>
-      </div>
+      <Description>
+        <strong>{descriptions[Number(formValues.speed) - 1].strong}</strong>
+        {descriptions[Number(formValues.speed) - 1].text}
+      </Description>
     </div>
   );
 }

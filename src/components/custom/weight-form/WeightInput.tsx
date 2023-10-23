@@ -6,11 +6,12 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import WeightFormContext from "@/contexts/WeightFormContext";
-import WeightInputText from "./WeightInputText";
-import WeightInputSlider from "./WeightInputSlider";
+import WeightInputText from "./weight-inputs/WeightInputText";
+import WeightInputSlider from "./weight-inputs/WeightInputSlider";
+import WeightInputOptions from "./weight-inputs/WeightInputOptions";
 
 interface Props {
-  name: "weight" | "desiredWeight" | "speed";
+  name: string;
   label: string;
   placeholder?: { kg: string; lb: string };
   description?: string;
@@ -90,6 +91,7 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
       transition={{ duration: 0.2 }}
     >
       <Label className="text-3xl font-medium">{label}</Label>
+
       {name === "speed" && <WeightInputSlider />}
       {(name === "weight" || name === "desiredWeight") && (
         <WeightInputText
@@ -98,6 +100,10 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
           description={description!}
         />
       )}
+      {name === "customizeMeals" && (
+        <WeightInputOptions description={description!} />
+      )}
+
       {errorMessage && (
         <div className="text-sm mt-2 text-red-500 font-medium">
           {errorMessage}
@@ -117,11 +123,7 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
         <Button
           onClick={handleNextStep}
           disabled={formValues[name] === ""}
-          className={twMerge(
-            "space-x-1 group"
-            // TODO
-            // step === totalSteps && "bg-orange-600"
-          )}
+          className={twMerge("space-x-1 group")}
         >
           <span>{step === totalSteps ? "Submit" : "Next"}</span>
           {step !== totalSteps && (
