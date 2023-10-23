@@ -20,7 +20,7 @@ function WeightInput({ name, label, placeholder, description }: Props) {
   const [units, setUnits] = useState<"lb" | "kg">("lb");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { formValues, setFormValues, step, setStep, formRef } =
+  const { formValues, setFormValues, totalSteps, step, setStep, formRef } =
     useContext(WeightFormContext);
 
   const handleNextStep = useCallback(
@@ -28,7 +28,7 @@ function WeightInput({ name, label, placeholder, description }: Props) {
       if (e) e.preventDefault();
       setErrorMessage("");
 
-      if (name === "speed") {
+      if (step === totalSteps) {
         formRef.current?.submit();
       }
 
@@ -59,7 +59,15 @@ function WeightInput({ name, label, placeholder, description }: Props) {
 
       setStep((step) => step + 1);
     },
-    [formRef, formValues.desiredWeight, formValues.weight, name, setStep]
+    [
+      formRef,
+      formValues.desiredWeight,
+      formValues.weight,
+      name,
+      setStep,
+      step,
+      totalSteps,
+    ]
   );
 
   useEffect(() => {
@@ -190,10 +198,7 @@ function WeightInput({ name, label, placeholder, description }: Props) {
             e.preventDefault();
             setStep((step) => step - 1);
           }}
-          className={twMerge(
-            "space-x-1 group",
-            name === "weight" && "invisible"
-          )}
+          className={twMerge("space-x-1 group", step === 1 && "invisible")}
         >
           <ArrowLeft className="h-5 group-hover:-translate-x-1 transition" />
           <span>Previous</span>
@@ -204,10 +209,10 @@ function WeightInput({ name, label, placeholder, description }: Props) {
           className={twMerge(
             "space-x-1 group"
             // TODO
-            // name === "speed" && "bg-orange-600"
+            // step === totalSteps && "bg-orange-600"
           )}
         >
-          <span>{name === "speed" ? "Submit" : "Next"}</span>
+          <span>{step === totalSteps ? "Submit" : "Next"}</span>
           {name !== "speed" && (
             <ArrowRight className="h-5 group-hover:translate-x-1 transition" />
           )}

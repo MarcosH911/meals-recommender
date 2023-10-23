@@ -7,6 +7,8 @@ import { Progress } from "@/components/ui/progress";
 import WeightInput from "@/components/custom/WeightInput";
 import WeightFormContext from "@/contexts/WeightFormContext";
 
+const totalSteps = 3;
+
 function WeightForm() {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
@@ -21,7 +23,7 @@ function WeightForm() {
 
   return (
     <WeightFormContext.Provider
-      value={{ formValues, setFormValues, step, setStep, formRef }}
+      value={{ formValues, setFormValues, totalSteps, step, setStep, formRef }}
     >
       <div>
         <Progress value={step * 25} className="mb-10" />
