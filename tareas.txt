@@ -1,3 +1,5 @@
 Save form values to local storage
 
 Prevent next without filling the form
+
+Enter to next page in the form
