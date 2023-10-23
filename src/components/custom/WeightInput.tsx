@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -7,36 +7,21 @@ import { Slider } from "../ui/slider";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
+import WeightFormContext from "@/contexts/WeightFormContext";
 
 interface Props {
   name: "weight" | "desiredWeight" | "speed";
   label: string;
   placeholder?: { kg: string; lb: string };
   description?: string;
-  formValues: { weight: string; desiredWeight: string; speed: string };
-  setFormValues: React.Dispatch<
-    React.SetStateAction<{
-      weight: string;
-      desiredWeight: string;
-      speed: string;
-    }>
-  >;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  formRef: React.RefObject<HTMLFormElement>;
 }
 
-function WeightInput({
-  name,
-  label,
-  placeholder,
-  description,
-  formValues,
-  setFormValues,
-  setStep,
-  formRef,
-}: Props) {
+function WeightInput({ name, label, placeholder, description }: Props) {
   const [units, setUnits] = useState<"lb" | "kg">("lb");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { formValues, setFormValues, step, setStep, formRef } =
+    useContext(WeightFormContext);
 
   const handleNextStep = useCallback(
     (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
