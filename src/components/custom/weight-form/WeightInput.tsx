@@ -9,6 +9,7 @@ import WeightFormContext from "@/contexts/WeightFormContext";
 import WeightInputText from "./weight-inputs/WeightInputText";
 import WeightInputSlider from "./weight-inputs/WeightInputSlider";
 import WeightInputOptions from "./weight-inputs/WeightInputOptions";
+import WeightInputSwitch from "./weight-inputs/WeightInputSwitch";
 
 interface Props {
   name: string;
@@ -92,7 +93,6 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
     >
       <Label className="text-3xl font-medium">{label}</Label>
 
-      {name === "speed" && <WeightInputSlider />}
       {(name === "weight" || name === "desiredWeight") && (
         <WeightInputText
           name={name}
@@ -100,6 +100,7 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
           description={description!}
         />
       )}
+      {name === "speed" && <WeightInputSlider />}
       {name === "customizeMeals" && (
         <WeightInputOptions
           name="customizeMeals"
@@ -109,6 +110,9 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
           ]}
           description={description!}
         />
+      )}
+      {name === "mealTypes" && (
+        <WeightInputSwitch options={[{ text: "breakfast" }]} />
       )}
 
       {errorMessage && (

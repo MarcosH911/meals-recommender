@@ -4,6 +4,8 @@ Form buttons update too quickly before animation finishes
 
 Tailwind prettier
 
+Slow options select
+
 
 Weight input form:
 - Customize foods (boolean)

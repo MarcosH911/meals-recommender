@@ -7,7 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import WeightInput from "@/components/custom/weight-form/WeightInput";
 import WeightFormContext from "@/contexts/WeightFormContext";
 
-const totalSteps = 4;
+const totalSteps = 6;
 
 function WeightForm() {
   const [step, setStep] = useState(1);
@@ -16,6 +16,7 @@ function WeightForm() {
     desiredWeight: "",
     speed: "3",
     customizeMeals: "",
+    mealTypes: { breakfast: true, lunch: true, dinner: true },
   });
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -65,6 +66,13 @@ function WeightForm() {
                 label="Do you want to customize your meals?"
                 description="You can always change them later."
                 key={step}
+              />
+            )}
+            {step === 5 && (
+              <WeightInput
+                step={5}
+                name="mealTypes"
+                label="What meals do you want to have?"
               />
             )}
           </AnimatePresence>

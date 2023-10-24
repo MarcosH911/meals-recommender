@@ -6,16 +6,20 @@ interface WeightFormContextTypes {
     desiredWeight: string;
     speed: string;
     customizeMeals: string;
-    [key: string]: string;
+    mealTypes: { breakfast: boolean; lunch: boolean; dinner: boolean };
+    [key: string]: any;
   };
+
   setFormValues: React.Dispatch<
     React.SetStateAction<{
       weight: string;
       desiredWeight: string;
       speed: string;
       customizeMeals: string;
+      mealTypes: { breakfast: boolean; lunch: boolean; dinner: boolean };
     }>
   >;
+
   totalSteps: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   formRef: React.RefObject<HTMLFormElement>;
