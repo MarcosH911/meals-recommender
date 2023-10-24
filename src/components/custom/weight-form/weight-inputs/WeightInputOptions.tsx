@@ -1,9 +1,11 @@
-import Description from "@/components/ui/description";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import WeightFormContext from "@/contexts/WeightFormContext";
+"use client";
+
 import { useContext } from "react";
 import { twMerge } from "tailwind-merge";
+
+import WeightFormContext from "@/contexts/WeightFormContext";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface Props {
   description: string;
@@ -11,11 +13,11 @@ interface Props {
   options: { text: string; value: string }[];
 }
 
-function WeightInputOptions({ name, options, description }: Props) {
+function WeightInputOptions({ name, options }: Props) {
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
   return (
-    <div className="my-6">
+    <div className="mt-6">
       <RadioGroup
         value={formValues[name]}
         onValueChange={(value) =>
@@ -55,7 +57,6 @@ function WeightInputOptions({ name, options, description }: Props) {
           </div>
         ))}
       </RadioGroup>
-      <Description>{description}</Description>
     </div>
   );
 }

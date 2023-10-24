@@ -7,6 +7,10 @@ interface WeightFormContextTypes {
     speed: string;
     customizeMeals: string;
     mealTypes: { breakfast: boolean; lunch: boolean; dinner: boolean };
+    maxCookingTime: string;
+    excludeIngredients: string[];
+    includeIngredients: string[];
+    calorieDistribution: {};
     [key: string]: any;
   };
 
@@ -17,6 +21,10 @@ interface WeightFormContextTypes {
       speed: string;
       customizeMeals: string;
       mealTypes: { breakfast: boolean; lunch: boolean; dinner: boolean };
+      maxCookingTime: string;
+      excludeIngredients: string[];
+      includeIngredients: string[];
+      calorieDistribution: {};
     }>
   >;
 

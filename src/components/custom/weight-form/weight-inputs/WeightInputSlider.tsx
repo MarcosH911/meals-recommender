@@ -1,64 +1,45 @@
 "use client";
 
-import Description from "@/components/ui/description";
-import { Slider } from "@/components/ui/slider";
-import WeightFormContext from "@/contexts/WeightFormContext";
 import { useContext } from "react";
 
-const descriptions = [
-  {
-    strong: "Slow but steady:",
-    text: " Choose this option for a gradual and sustainable weight loss journey.",
-  },
-  {
-    strong: "Steady progress:",
-    text: " Opt for this level to maintain a balanced pace towards your weight loss goals.",
-  },
-  {
-    strong: "Moderate pace:",
-    text: " This option strikes a balance between speed and sustainability.",
-  },
-  {
-    strong: "Accelerated results:",
-    text: " Select this for faster weight loss with commitment and discipline.",
-  },
-  {
-    strong: "Rapid transformation:",
-    text: " For those ready to embrace an intense weight loss journey, choose this level.",
-  },
-];
+import WeightFormContext from "@/contexts/WeightFormContext";
+import { Slider } from "@/components/ui/slider";
 
-function WeightInputSlider() {
+interface Props {
+  min: number;
+  max: number;
+  step: number;
+  name: string;
+}
+
+function WeightInputSlider({ min, max, step, name }: Props) {
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
   return (
-    <div>
+    <div className="pt-6">
       <Slider
         autoFocus
-        defaultValue={[1]}
-        min={1}
-        max={5}
-        step={1}
+        min={min}
+        max={max}
+        step={step}
         className="cursor-pointer mt-6"
-        value={[Number(formValues.speed)]}
+        value={[Number(formValues[name])]}
         onValueChange={([value]) =>
           setFormValues((values) => ({
             ...values,
-            speed: value.toString(),
+            [name]: value.toString(),
           }))
         }
       />
-      <div className="pb-2 pt-3 flex justify-between px-1.5">
-        {Array(5)
+      <div className="pb-1 pt-3 flex justify-between -mx-1">
+        {Array((max - min) / step + 1)
           .fill(true)
           .map((_, i) => (
-            <p key={i}>{i + 1}</p>
+            <p key={i} className="w-7 text-center">
+              {min + i * step}
+            </p>
           ))}
       </div>
-      <Description>
-        <strong>{descriptions[Number(formValues.speed) - 1].strong}</strong>
-        {descriptions[Number(formValues.speed) - 1].text}
-      </Description>
     </div>
   );
 }

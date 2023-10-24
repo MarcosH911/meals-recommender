@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
@@ -10,6 +12,7 @@ import WeightInputText from "./weight-inputs/WeightInputText";
 import WeightInputSlider from "./weight-inputs/WeightInputSlider";
 import WeightInputOptions from "./weight-inputs/WeightInputOptions";
 import WeightInputSwitch from "./weight-inputs/WeightInputSwitch";
+import Description from "@/components/ui/description";
 
 interface Props {
   name: string;
@@ -18,6 +21,29 @@ interface Props {
   description?: string;
   step: number;
 }
+
+const speedDescriptions = [
+  {
+    strong: "Slow but steady:",
+    text: " Choose this option for a gradual and sustainable weight loss journey.",
+  },
+  {
+    strong: "Steady progress:",
+    text: " Opt for this level to maintain a balanced pace towards your weight loss goals.",
+  },
+  {
+    strong: "Moderate pace:",
+    text: " This option strikes a balance between speed and sustainability.",
+  },
+  {
+    strong: "Accelerated results:",
+    text: " Select this for faster weight loss with commitment and discipline.",
+  },
+  {
+    strong: "Rapid transformation:",
+    text: " For those ready to embrace an intense weight loss journey, choose this level.",
+  },
+];
 
 function WeightInput({ name, label, placeholder, description, step }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -59,17 +85,19 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
         return;
       }
 
+      if (
+        name === "mealTypes" &&
+        !formValues.mealTypes.breakfast &&
+        !formValues.mealTypes.lunch &&
+        !formValues.mealTypes.dinner
+      ) {
+        setErrorMessage("You must select at least one.");
+        return;
+      }
+
       setStep((step) => step + 1);
     },
-    [
-      formRef,
-      formValues.desiredWeight,
-      formValues.weight,
-      name,
-      setStep,
-      step,
-      totalSteps,
-    ]
+    [formRef, formValues, name, setStep, step, totalSteps]
   );
 
   useEffect(() => {
@@ -100,7 +128,9 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
           description={description!}
         />
       )}
-      {name === "speed" && <WeightInputSlider />}
+      {name === "speed" && (
+        <WeightInputSlider name="speed" min={1} max={5} step={1} />
+      )}
       {name === "customizeMeals" && (
         <WeightInputOptions
           name="customizeMeals"
@@ -112,7 +142,30 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
         />
       )}
       {name === "mealTypes" && (
-        <WeightInputSwitch options={[{ text: "breakfast" }]} />
+        <WeightInputSwitch
+          name="mealTypes"
+          options={[
+            { text: "Breakfast", key: "breakfast" },
+            { text: "Lunch", key: "lunch" },
+            { text: "Dinner", key: "dinner" },
+          ]}
+        />
+      )}
+      {name === "maxCookingTime" && (
+        <WeightInputSlider name="maxCookingTime" min={10} max={120} step={10} />
+      )}
+
+      {name === "speed" ? (
+        <Description>
+          <span>
+            <strong>
+              {speedDescriptions[Number(formValues.speed) - 1].strong}
+            </strong>
+            {speedDescriptions[Number(formValues.speed) - 1].text}
+          </span>
+        </Description>
+      ) : (
+        <Description>{description}</Description>
       )}
 
       {errorMessage && (

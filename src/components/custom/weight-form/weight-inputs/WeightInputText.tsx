@@ -5,7 +5,6 @@ import { useContext, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WeightFormContext from "@/contexts/WeightFormContext";
-import Description from "@/components/ui/description";
 
 interface Props {
   name: string;
@@ -13,7 +12,7 @@ interface Props {
   description: string;
 }
 
-function WeightInputText({ name, placeholder, description }: Props) {
+function WeightInputText({ name, placeholder }: Props) {
   const [units, setUnits] = useState<"lb" | "kg">("lb");
 
   const { formValues, setFormValues } = useContext(WeightFormContext);
@@ -55,7 +54,6 @@ function WeightInputText({ name, placeholder, description }: Props) {
             : placeholder && placeholder.kg
         }
       />
-      <Description>{description}</Description>
     </div>
   );
 }
