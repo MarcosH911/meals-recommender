@@ -154,6 +154,7 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
       {name === "maxCookingTime" && (
         <WeightInputSlider name="maxCookingTime" min={10} max={120} step={10} />
       )}
+      {name === "includeIngredients"}
 
       {name === "speed" ? (
         <Description>
