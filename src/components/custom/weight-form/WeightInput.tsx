@@ -13,6 +13,7 @@ import WeightInputSlider from "./weight-inputs/WeightInputSlider";
 import WeightInputOptions from "./weight-inputs/WeightInputOptions";
 import WeightInputSwitch from "./weight-inputs/WeightInputSwitch";
 import Description from "@/components/ui/description";
+import WeightInputSelect from "./weight-inputs/WeightInputSelect";
 
 interface Props {
   name: string;
@@ -154,7 +155,12 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
       {name === "maxCookingTime" && (
         <WeightInputSlider name="maxCookingTime" min={10} max={120} step={10} />
       )}
-      {name === "includeIngredients"}
+      {name === "excludeIngredients" && (
+        <WeightInputSelect
+          name="excludeIngredients"
+          apiPath="api/get-ingredients"
+        />
+      )}
 
       {name === "speed" ? (
         <Description>
