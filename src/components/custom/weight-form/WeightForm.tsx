@@ -10,7 +10,7 @@ import WeightFormContext from "@/contexts/WeightFormContext";
 const totalSteps = 9;
 
 function WeightForm() {
-  const [step, setStep] = useState(7);
+  const [step, setStep] = useState(6);
   const [formValues, setFormValues] = useState({
     weight: "",
     desiredWeight: "",

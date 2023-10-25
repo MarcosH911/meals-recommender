@@ -1,10 +1,8 @@
 Save form values to local storage
 
-Form buttons update too quickly before animation finishes
-
 Tailwind prettier
 
-Slow options select
+Weight Input Select Loading not working
 
 
 Weight input form:

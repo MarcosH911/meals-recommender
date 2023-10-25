@@ -162,6 +162,13 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
         />
       )}
 
+      {name === "includeIngredients" && (
+        <WeightInputSelect
+          name="includeIngredients"
+          apiPath="api/get-ingredients"
+        />
+      )}
+
       {name === "speed" ? (
         <Description>
           <span>

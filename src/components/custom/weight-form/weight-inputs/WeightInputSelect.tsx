@@ -16,7 +16,7 @@ interface Props {
 }
 
 function WeightInputSelect({ name, apiPath }: Props) {
-  const { data: options } = useSWR(apiPath);
+  const { data: options, isLoading } = useSWR(apiPath);
 
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
