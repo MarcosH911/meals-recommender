@@ -14,7 +14,7 @@ function WeightInputSwitch({ name, options }: Props) {
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
   return (
-    <div className="flex flex-col pt-6 gap-2">
+    <div className="flex flex-col gap-2 pt-6">
       {options.map((option, index) => (
         <div key={index} className="flex items-center gap-2">
           <Switch

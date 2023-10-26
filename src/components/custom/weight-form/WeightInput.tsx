@@ -98,7 +98,7 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
 
       setStep((step) => step + 1);
     },
-    [formRef, formValues, name, setStep, step, totalSteps]
+    [formRef, formValues, name, setStep, step, totalSteps],
   );
 
   const getCalorieDistributionOptions = useCallback(() => {
@@ -228,29 +228,29 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
       )}
 
       {errorMessage && (
-        <div className="text-sm mt-2 text-red-500 font-medium">
+        <div className="mt-2 text-sm font-medium text-red-500">
           {errorMessage}
         </div>
       )}
-      <div className="flex justify-between items-center mt-6">
+      <div className="mt-6 flex items-center justify-between">
         <Button
           onClick={(e) => {
             e.preventDefault();
             setStep((step) => step - 1);
           }}
-          className={twMerge("space-x-1 group", step === 1 && "invisible")}
+          className={twMerge("group space-x-1", step === 1 && "invisible")}
         >
-          <ArrowLeft className="h-5 group-hover:-translate-x-1 transition" />
+          <ArrowLeft className="h-5 transition group-hover:-translate-x-1" />
           <span>Previous</span>
         </Button>
         <Button
           onClick={handleNextStep}
           disabled={formValues[name] === ""}
-          className={twMerge("space-x-1 group")}
+          className={twMerge("group space-x-1")}
         >
           <span>{step === totalSteps ? "Submit" : "Next"}</span>
           {step !== totalSteps && (
-            <ArrowRight className="h-5 group-hover:translate-x-1 transition" />
+            <ArrowRight className="h-5 transition group-hover:translate-x-1" />
           )}
         </Button>
       </div>

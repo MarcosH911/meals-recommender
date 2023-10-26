@@ -22,35 +22,35 @@ function WeightInputSelect({ name, apiPath }: Props) {
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
   return (
-    <ScrollArea type="always" className="h-[min(40rem,calc(100vh-18rem))] mt-6">
+    <ScrollArea type="always" className="mt-6 h-[min(40rem,calc(100vh-18rem))]">
       <div className="grid grid-cols-3 gap-2">
         {isLoading &&
           Array(33)
             .fill(true)
             .map((_, index) => (
               <AspectRatio key={index}>
-                <div className="w-full h-full bg-slate-400 rounded-lg animate-pulse"></div>
+                <div className="h-full w-full animate-pulse rounded-lg bg-slate-400"></div>
               </AspectRatio>
             ))}
         {options?.data.map(
           (
             option: { text: string; key: string; imageUrl: string },
-            index: number
+            index: number,
           ) => (
             <AspectRatio key={index}>
               <div
                 className={twMerge(
-                  "relative border-transparent bg-slate-400 rounded-lg w-full h-full group shadow-md transition duration-150",
+                  "group relative h-full w-full rounded-lg border-transparent bg-slate-400 shadow-md transition duration-150",
                   formValues.includeIngredients.includes(option.key) &&
-                    "bg-slate-600"
+                    "bg-slate-600",
                 )}
               >
-                <div className="bg-gradient-to-t from-slate-900/60 via-transparent to-transparent w-full h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg">
-                  <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-t opacity-0 group-hover:opacity-100 transition duration-300 from-slate-900/60 to-transparent rounded-lg"></div>
+                <div className="absolute left-1/2 top-1/2 z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-lg bg-gradient-to-t from-slate-900/60 via-transparent to-transparent">
+                  <div className="absolute left-0 top-0 h-full w-full rounded-lg bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
                 </div>
                 <label
                   htmlFor={"checkbox" + name + option.text + index}
-                  className="absolute h-full w-full inset-0 cursor-pointer z-30"
+                  className="absolute inset-0 z-30 h-full w-full cursor-pointer"
                 ></label>
                 <Checkbox
                   id={"checkbox" + name + option.text + index}
@@ -58,18 +58,18 @@ function WeightInputSelect({ name, apiPath }: Props) {
                     setFormValues((values) => ({
                       ...values,
                       includeIngredients: values.includeIngredients.includes(
-                        option.key
+                        option.key,
                       )
                         ? values.includeIngredients.filter(
-                            (key) => key !== option.key
+                            (key) => key !== option.key,
                           )
                         : [...values.includeIngredients, option.key],
                     }))
                   }
                   checked={formValues.includeIngredients.includes(option.key)}
-                  className="absolute top-2 left-2 border-white data-[state=checked]:bg-white data-[state=checked]:text-slate-900 z-20"
+                  className="absolute left-2 top-2 z-20 border-white data-[state=checked]:bg-white data-[state=checked]:text-slate-900"
                 />
-                <div className="absolute w-[calc(100%-2rem)] h-[calc(100%-2rem)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4">
+                <div className="absolute left-1/2 top-1/2 h-[calc(100%-2rem)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 p-4">
                   <Image
                     src={option.imageUrl}
                     alt={option.text}
@@ -81,13 +81,13 @@ function WeightInputSelect({ name, apiPath }: Props) {
                 </div>
                 <Label
                   htmlFor={"checkbox" + name + option.text + index}
-                  className="absolute bottom-1.5 text-lg left-1/2 -translate-x-1/2 z-20 text-white group-hover:-translate-y-1 transition duration-300"
+                  className="absolute bottom-1.5 left-1/2 z-20 -translate-x-1/2 text-lg text-white transition duration-300 group-hover:-translate-y-1"
                 >
                   {option.text}
                 </Label>
               </div>
             </AspectRatio>
-          )
+          ),
         )}
       </div>
     </ScrollArea>

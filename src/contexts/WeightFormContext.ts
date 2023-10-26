@@ -34,7 +34,7 @@ interface WeightFormContextTypes {
 }
 
 const WeightFormContext = createContext<WeightFormContextTypes>(
-  {} as WeightFormContextTypes
+  {} as WeightFormContextTypes,
 );
 
 export default WeightFormContext;

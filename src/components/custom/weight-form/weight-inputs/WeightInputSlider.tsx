@@ -34,7 +34,7 @@ function WeightInputSlider({ name, options }: Props) {
             min={option.min}
             max={option.max}
             step={option.step}
-            className="cursor-pointer mt-6"
+            className="mt-6 cursor-pointer"
             value={
               option.key
                 ? [Number(formValues[name][option.key])]
@@ -55,7 +55,7 @@ function WeightInputSlider({ name, options }: Props) {
               }
             }}
           />
-          <div className="pb-1 pt-3 flex justify-between -mx-1">
+          <div className="-mx-1 flex justify-between pb-1 pt-3">
             {Array((option.max - option.min) / option.step + 1)
               .fill(true)
               .map((_, i) => (
