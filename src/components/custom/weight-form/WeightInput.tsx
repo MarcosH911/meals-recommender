@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import { Button } from "../../ui/button";
-import { Label } from "../../ui/label";
 import WeightFormContext from "@/contexts/WeightFormContext";
 import WeightInputText from "./weight-inputs/WeightInputText";
 import WeightInputSlider from "./weight-inputs/WeightInputSlider";
@@ -14,6 +12,8 @@ import WeightInputOptions from "./weight-inputs/WeightInputOptions";
 import WeightInputSwitch from "./weight-inputs/WeightInputSwitch";
 import Description from "@/components/ui/description";
 import WeightInputSelect from "./weight-inputs/WeightInputSelect";
+import { Button } from "../../ui/button";
+import { Label } from "../../ui/label";
 
 interface Props {
   name: string;
@@ -49,7 +49,7 @@ const speedDescriptions = [
 function WeightInput({ name, label, placeholder, description, step }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { formValues, setFormValues, totalSteps, setStep, formRef } =
+  const { formValues, totalSteps, setStep, formRef } =
     useContext(WeightFormContext);
 
   const handleNextStep = useCallback(
@@ -175,7 +175,16 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
         />
       )}
 
-      {name === "calorieDistribution" && <WeightInputSlider />}
+      {name === "calorieDistribution" && (
+        <WeightInputSlider
+          name="calorieDistribution"
+          options={[
+            { label: "Breakfast", min: 0, max: 100, step: 10 },
+            { label: "Lunch", min: 0, max: 100, step: 10 },
+            { label: "Dinner", min: 0, max: 100, step: 10 },
+          ]}
+        />
+      )}
 
       {name === "speed" ? (
         <Description>
