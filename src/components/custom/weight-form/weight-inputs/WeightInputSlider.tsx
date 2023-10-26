@@ -25,7 +25,9 @@ function WeightInputSlider({ name, options }: Props) {
       {options.map((option, index) => (
         <div key={index}>
           {option.label && (
-            <Label className="font-medium">{option.label}</Label>
+            <div className="-mb-2 mt-4">
+              <Label className="font-medium">{option.label}</Label>
+            </div>
           )}
           <Slider
             autoFocus
@@ -38,6 +40,7 @@ function WeightInputSlider({ name, options }: Props) {
                 ? [Number(formValues[name][option.key])]
                 : [Number(formValues[name])]
             }
+            defaultValue={[0]}
             onValueChange={([value]) => {
               if (option.key) {
                 setFormValues((values) => ({

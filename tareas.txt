@@ -2,7 +2,7 @@ Save form values to local storage
 
 Tailwind prettier
 
-Weight Input Select Loading not working
+Change weight form transition
 
 
 Weight input form:
