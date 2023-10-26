@@ -24,7 +24,7 @@ function WeightInputSelect({ name, apiPath }: Props) {
     <ScrollArea type="always" className="h-[min(40rem,calc(100vh-18rem))] mt-6">
       <div className="grid grid-cols-3 gap-2">
         {isLoading &&
-          Array(30)
+          Array(33)
             .fill(true)
             .map((_, index) => (
               <div
