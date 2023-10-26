@@ -20,7 +20,7 @@ function WeightForm() {
     maxCookingTime: "60",
     includeIngredients: [""],
     excludeIngredients: [""],
-    calorieDistribution: {},
+    calorieDistribution: { breakfast: "0", lunch: "0", dinner: "0" },
   });
 
   const formRef = useRef<HTMLFormElement>(null);

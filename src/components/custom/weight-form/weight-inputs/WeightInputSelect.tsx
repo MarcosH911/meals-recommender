@@ -29,7 +29,7 @@ function WeightInputSelect({ name, apiPath }: Props) {
             .map((_, index) => (
               <div
                 key={index}
-                className="w-full aspect-square bg-slate-400 rounded-lg"
+                className="w-full aspect-square bg-slate-400 rounded-lg animate-pulse"
               ></div>
             ))}
         {options?.data.map(

@@ -101,6 +101,38 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
     [formRef, formValues, name, setStep, step, totalSteps]
   );
 
+  const getCalorieDistributionOptions = useCallback(() => {
+    const options = [];
+    if (formValues.mealTypes.breakfast) {
+      options.push({
+        key: "breakfast",
+        label: "Breakfast",
+        min: 0,
+        max: 100,
+        step: 10,
+      });
+    }
+    if (formValues.mealTypes.lunch) {
+      options.push({
+        key: "lunch",
+        label: "Lunch",
+        min: 0,
+        max: 100,
+        step: 10,
+      });
+    }
+    if (formValues.mealTypes.dinner) {
+      options.push({
+        key: "dinner",
+        label: "Dinner",
+        min: 0,
+        max: 100,
+        step: 10,
+      });
+    }
+    return options;
+  }, [formValues.mealTypes]);
+
   useEffect(() => {
     const handleEnter = (e: KeyboardEvent) => {
       if (e.key === "Enter") {
@@ -178,11 +210,7 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
       {name === "calorieDistribution" && (
         <WeightInputSlider
           name="calorieDistribution"
-          options={[
-            { label: "Breakfast", min: 0, max: 100, step: 10 },
-            { label: "Lunch", min: 0, max: 100, step: 10 },
-            { label: "Dinner", min: 0, max: 100, step: 10 },
-          ]}
+          options={getCalorieDistributionOptions()}
         />
       )}
 

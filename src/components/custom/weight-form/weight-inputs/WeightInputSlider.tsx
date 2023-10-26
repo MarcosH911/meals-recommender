@@ -4,11 +4,12 @@ import { useContext } from "react";
 
 import WeightFormContext from "@/contexts/WeightFormContext";
 import { Slider } from "@/components/ui/slider";
+import { Label } from "@radix-ui/react-label";
 
 interface Props {
   options: {
-    label?: string;
     key?: string;
+    label?: string;
     min: number;
     max: number;
     step: number;
@@ -23,6 +24,9 @@ function WeightInputSlider({ name, options }: Props) {
     <div className="pt-6">
       {options.map((option, index) => (
         <div key={index}>
+          {option.label && (
+            <Label className="font-medium">{option.label}</Label>
+          )}
           <Slider
             autoFocus
             min={option.min}

@@ -10,7 +10,7 @@ interface WeightFormContextTypes {
     maxCookingTime: string;
     excludeIngredients: string[];
     includeIngredients: string[];
-    calorieDistribution: {};
+    calorieDistribution: { breakfast: string; lunch: string; dinner: string };
     [key: string]: any;
   };
 
@@ -24,7 +24,7 @@ interface WeightFormContextTypes {
       maxCookingTime: string;
       excludeIngredients: string[];
       includeIngredients: string[];
-      calorieDistribution: {};
+      calorieDistribution: { breakfast: string; lunch: string; dinner: string };
     }>
   >;
 
