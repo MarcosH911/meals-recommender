@@ -6,9 +6,12 @@ import WeightFormContext from "@/contexts/WeightFormContext";
 import { Slider } from "@/components/ui/slider";
 
 interface Props {
-  min: number;
-  max: number;
-  step: number;
+  options: {
+    label?: string;
+    min: number;
+    max: number;
+    step: number;
+  }[];
   name: string;
 }
 

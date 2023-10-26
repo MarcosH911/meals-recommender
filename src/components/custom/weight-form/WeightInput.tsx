@@ -130,7 +130,10 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
         />
       )}
       {name === "speed" && (
-        <WeightInputSlider name="speed" min={1} max={5} step={1} />
+        <WeightInputSlider
+          name="speed"
+          options={[{ min: 1, max: 5, step: 1 }]}
+        />
       )}
       {name === "customizeMeals" && (
         <WeightInputOptions
@@ -153,7 +156,10 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
         />
       )}
       {name === "maxCookingTime" && (
-        <WeightInputSlider name="maxCookingTime" min={10} max={120} step={10} />
+        <WeightInputSlider
+          name="maxCookingTime"
+          options={[{ min: 10, max: 120, step: 10 }]}
+        />
       )}
       {name === "excludeIngredients" && (
         <WeightInputSelect
@@ -168,6 +174,8 @@ function WeightInput({ name, label, placeholder, description, step }: Props) {
           apiPath="api/get-ingredients"
         />
       )}
+
+      {name === "calorieDistribution" && <WeightInputSlider />}
 
       {name === "speed" ? (
         <Description>
