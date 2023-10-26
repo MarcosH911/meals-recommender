@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import React, { createContext } from "react";
 
 interface WeightFormContextTypes {
   formValues: {
@@ -28,9 +28,12 @@ interface WeightFormContextTypes {
     }>
   >;
 
-  totalSteps: number;
+  step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  totalSteps: number;
   formRef: React.RefObject<HTMLFormElement>;
+  errorMessage: string;
+  setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const WeightFormContext = createContext<WeightFormContextTypes>(

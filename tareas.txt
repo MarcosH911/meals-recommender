@@ -4,6 +4,8 @@ Tailwind prettier
 
 Change weight form transition
 
+Vim ctrl+j for ctrl+.
+
 
 Weight input form:
 - Customize foods (boolean)

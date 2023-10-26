@@ -10,7 +10,8 @@ import WeightFormContext from "@/contexts/WeightFormContext";
 const totalSteps = 9;
 
 function WeightForm() {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(1);
+  const [errorMessage, setErrorMessage] = useState("");
   const [formValues, setFormValues] = useState({
     weight: "",
     desiredWeight: "",
@@ -29,7 +30,16 @@ function WeightForm() {
 
   return (
     <WeightFormContext.Provider
-      value={{ formValues, setFormValues, totalSteps, setStep, formRef }}
+      value={{
+        formValues,
+        setFormValues,
+        totalSteps,
+        step,
+        setStep,
+        formRef,
+        errorMessage,
+        setErrorMessage,
+      }}
     >
       <div>
         <Progress value={step * (100 / (totalSteps + 1))} className="mb-10" />
