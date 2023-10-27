@@ -14,7 +14,7 @@ interface Props {
   step: number;
   name: string;
   label: string;
-  description?: string;
+  description?: string | JSX.Element;
   customHandleNextStep?: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => void;

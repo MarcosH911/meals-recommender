@@ -8,7 +8,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
 interface Props {
-  description: string;
   name: string;
   options: { text: string; value: string }[];
 }

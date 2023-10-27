@@ -1,3 +1,5 @@
+"use client";
+
 import WeightInputWrapper from "@/components/custom/weight-form/WeightInputWrapper";
 import WeightInputText from "@/components/custom/weight-form/weight-inputs/WeightInputText";
 import WeightFormContext from "@/contexts/WeightFormContext";
