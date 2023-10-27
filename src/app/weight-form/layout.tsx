@@ -43,11 +43,13 @@ function Layout({ children }: Props) {
         setErrorMessage,
       }}
     >
-      <div>
-        <Progress value={step * (100 / (totalSteps + 1))} className="mb-10" />
-        <form onSubmit={handleSubmit} ref={formRef}>
-          <AnimatePresence mode="wait">{children}</AnimatePresence>
-        </form>
+      <div className="mx-auto max-w-md py-8">
+        <div>
+          <Progress value={step * (100 / (totalSteps + 1))} className="mb-10" />
+          <form onSubmit={handleSubmit} ref={formRef}>
+            <AnimatePresence mode="wait">{children}</AnimatePresence>
+          </form>
+        </div>
       </div>
     </WeightFormContext.Provider>
   );

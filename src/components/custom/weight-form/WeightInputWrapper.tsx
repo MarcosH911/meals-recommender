@@ -10,38 +10,44 @@ import { useContext } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface Props {
+  children: React.ReactNode;
   step: number;
   name: string;
   label: string;
   description?: string;
-  handleNextStep?: () => void;
-  handlePreviousStep?: () => void;
+  customHandleNextStep?: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void;
+  customHandlePreviousStep?: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void;
 }
 
 function WeightInputWrapper({
+  children,
   step,
   name,
   label,
   description,
-  handleNextStep,
-  handlePreviousStep,
+  customHandleNextStep,
+  customHandlePreviousStep,
 }: Props) {
   const { formValues, totalSteps, setStep, errorMessage } =
     useContext(WeightFormContext);
 
-  const defaultHandleNextStep = (
+  const handleNextStep = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    if (handleNextStep) return handleNextStep();
+    if (customHandleNextStep) return customHandleNextStep(e);
 
     e.preventDefault();
     setStep((step) => step + 1);
   };
 
-  const defaultHandlePreviousStep = (
+  const handlePreviousStep = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    if (handlePreviousStep) return handlePreviousStep();
+    if (customHandlePreviousStep) return customHandlePreviousStep(e);
 
     e.preventDefault();
     setStep((step) => step - 1);
@@ -55,6 +61,8 @@ function WeightInputWrapper({
       transition={{ duration: 0.2 }}
     >
       <Label className="text-3xl font-medium">{label}</Label>
+
+      {children}
 
       <Description>{description}</Description>
 

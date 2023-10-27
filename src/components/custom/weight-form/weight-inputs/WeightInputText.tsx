@@ -9,7 +9,6 @@ import WeightFormContext from "@/contexts/WeightFormContext";
 interface Props {
   name: string;
   placeholder: { kg: string; lb: string };
-  description: string;
 }
 
 function WeightInputText({ name, placeholder }: Props) {
