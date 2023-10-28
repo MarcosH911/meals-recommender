@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import useSWR from "swr";
 import { useContext } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -13,26 +12,24 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Props {
   name: string;
-  apiPath: string;
+  options: { text: string; key: string; imageUrl: string }[];
 }
 
-function WeightInputSelect({ name, apiPath }: Props) {
-  const { data: options, isLoading } = useSWR(apiPath);
-
+function WeightInputSelect({ name, options }: Props) {
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
   return (
     <ScrollArea type="always" className="mt-6 h-[min(40rem,calc(100vh-18rem))]">
       <div className="grid grid-cols-3 gap-2">
-        {isLoading &&
+        {/* {isLoading &&
           Array(33)
             .fill(true)
             .map((_, index) => (
               <AspectRatio key={index}>
                 <div className="h-full w-full animate-pulse rounded-lg bg-slate-400"></div>
               </AspectRatio>
-            ))}
-        {options?.data.map(
+            ))} */}
+        {options.map(
           (
             option: { text: string; key: string; imageUrl: string },
             index: number,
