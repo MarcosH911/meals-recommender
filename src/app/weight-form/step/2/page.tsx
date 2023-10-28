@@ -1,13 +1,18 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+
 import WeightInputWrapper from "@/components/custom/weight-form/WeightInputWrapper";
 import WeightInputText from "@/components/custom/weight-form/weight-inputs/WeightInputText";
 import WeightFormContext from "@/contexts/WeightFormContext";
-import { useContext } from "react";
+import useStep from "@/hooks/useStep";
 
 function Page() {
-  const { formValues, setErrorMessage, setStep } =
-    useContext(WeightFormContext);
+  const { formValues, setErrorMessage } = useContext(WeightFormContext);
+
+  const router = useRouter();
+  const step = useStep();
 
   const customHandleNextStep = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -21,12 +26,13 @@ function Page() {
     }
 
     e.preventDefault();
-    setStep((step) => step + 1);
+    router.push(`/weight-form/step/${step + 1}`);
   };
 
   return (
     <WeightInputWrapper
       step={2}
+      key={2}
       name="desiredWeight"
       label="What is your desired weight?"
       description="Push yourself to the limit!"

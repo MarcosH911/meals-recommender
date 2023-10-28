@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import WeightFormContext from "@/contexts/WeightFormContext";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -32,8 +33,10 @@ function WeightInputWrapper({
   customHandleNextStep,
   customHandlePreviousStep,
 }: Props) {
-  const { formValues, totalSteps, setStep, errorMessage } =
+  const { formValues, totalSteps, errorMessage } =
     useContext(WeightFormContext);
+
+  const router = useRouter();
 
   const handleNextStep = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -41,7 +44,7 @@ function WeightInputWrapper({
     if (customHandleNextStep) return customHandleNextStep(e);
 
     e.preventDefault();
-    setStep((step) => step + 1);
+    router.push(`/weight-form/step/${step + 1}`);
   };
 
   const handlePreviousStep = (
@@ -50,7 +53,7 @@ function WeightInputWrapper({
     if (customHandlePreviousStep) return customHandlePreviousStep(e);
 
     e.preventDefault();
-    setStep((step) => step - 1);
+    router.push(`/weight-form/step/${step - 1}`);
   };
 
   return (
@@ -60,36 +63,38 @@ function WeightInputWrapper({
       exit={{ y: -10, opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <Label className="text-3xl font-medium">{label}</Label>
+      <div>
+        <Label className="text-3xl font-medium">{label}</Label>
 
-      {children}
+        {children}
 
-      <Description>{description}</Description>
+        <Description>{description}</Description>
 
-      {errorMessage && (
-        <div className="mt-2 text-sm font-medium text-red-500">
-          {errorMessage}
+        {errorMessage && (
+          <div className="mt-2 text-sm font-medium text-red-500">
+            {errorMessage}
+          </div>
+        )}
+
+        <div className="mt-6 flex items-center justify-between">
+          <Button
+            onClick={handlePreviousStep}
+            className={twMerge("group space-x-1", step === 1 && "invisible")}
+          >
+            <ArrowLeft className="h-5 transition group-hover:-translate-x-1" />
+            <span>Previous</span>
+          </Button>
+          <Button
+            onClick={handleNextStep}
+            disabled={formValues[name] === ""}
+            className={twMerge("group space-x-1")}
+          >
+            <span>{step === totalSteps ? "Submit" : "Next"}</span>
+            {step !== totalSteps && (
+              <ArrowRight className="h-5 transition group-hover:translate-x-1" />
+            )}
+          </Button>
         </div>
-      )}
-
-      <div className="mt-6 flex items-center justify-between">
-        <Button
-          onClick={handlePreviousStep}
-          className={twMerge("group space-x-1", step === 1 && "invisible")}
-        >
-          <ArrowLeft className="h-5 transition group-hover:-translate-x-1" />
-          <span>Previous</span>
-        </Button>
-        <Button
-          onClick={handleNextStep}
-          disabled={formValues[name] === ""}
-          className={twMerge("group space-x-1")}
-        >
-          <span>{step === totalSteps ? "Submit" : "Next"}</span>
-          {step !== totalSteps && (
-            <ArrowRight className="h-5 transition group-hover:translate-x-1" />
-          )}
-        </Button>
       </div>
     </motion.div>
   );

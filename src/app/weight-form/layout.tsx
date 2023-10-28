@@ -1,9 +1,11 @@
 "use client";
 
-import WeightFormContext from "@/contexts/WeightFormContext";
-import { Progress } from "@radix-ui/react-progress";
 import { AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
+
+import WeightFormContext from "@/contexts/WeightFormContext";
+import useStep from "@/hooks/useStep";
+import { Progress } from "@/components/ui/progress";
 
 interface Props {
   children: React.ReactNode;
@@ -12,7 +14,6 @@ interface Props {
 const totalSteps = 9;
 
 function Layout({ children }: Props) {
-  const [step, setStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState("");
   const [formValues, setFormValues] = useState({
     weight: "",
@@ -28,6 +29,8 @@ function Layout({ children }: Props) {
 
   const formRef = useRef<HTMLFormElement>(null);
 
+  const step = useStep();
+
   const handleSubmit = () => {};
 
   return (
@@ -35,8 +38,6 @@ function Layout({ children }: Props) {
       value={{
         formValues,
         setFormValues,
-        step,
-        setStep,
         totalSteps,
         formRef,
         errorMessage,

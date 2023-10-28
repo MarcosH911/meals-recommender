@@ -28,8 +28,6 @@ interface WeightFormContextTypes {
     }>
   >;
 
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
   totalSteps: number;
   formRef: React.RefObject<HTMLFormElement>;
   errorMessage: string;
