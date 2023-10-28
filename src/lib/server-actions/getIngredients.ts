@@ -1,15 +1,11 @@
 "use server";
 
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-
-export const dynamic = "force-dynamic";
+import supabaseClient from "../supabaseClient";
 
 async function getIngredients() {
   "use server";
-  const supabase = createServerComponentClient({ cookies });
 
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("ingredients")
     .select("name, image_url");
 
@@ -20,8 +16,9 @@ async function getIngredients() {
   const formattedData = data.map((item) => ({
     text: item.name,
     key: item.name.toLowerCase(),
-    imageUrl: supabase.storage.from("ingredients").getPublicUrl(item.image_url)
-      .data.publicUrl,
+    imageUrl: supabaseClient.storage
+      .from("ingredients")
+      .getPublicUrl(item.image_url).data.publicUrl,
   }));
 
   return formattedData;
