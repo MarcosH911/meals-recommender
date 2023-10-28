@@ -30,8 +30,7 @@ function WeightInputSelect({ name, options }: Props) {
               <div
                 className={twMerge(
                   "group relative h-full w-full rounded-lg border-transparent bg-slate-400 shadow-md transition duration-150",
-                  formValues.includeIngredients.includes(option.key) &&
-                    "bg-slate-600",
+                  formValues[name].includes(option.key) && "bg-slate-600",
                 )}
               >
                 <div className="absolute left-1/2 top-1/2 z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-lg bg-gradient-to-t from-slate-900/60 via-transparent to-transparent">
@@ -46,16 +45,14 @@ function WeightInputSelect({ name, options }: Props) {
                   onCheckedChange={() =>
                     setFormValues((values) => ({
                       ...values,
-                      includeIngredients: values.includeIngredients.includes(
-                        option.key,
-                      )
-                        ? values.includeIngredients.filter(
-                            (key) => key !== option.key,
+                      [name]: values[name].includes(option.key)
+                        ? values[name].filter(
+                            (key: string) => key !== option.key,
                           )
-                        : [...values.includeIngredients, option.key],
+                        : [...values[name], option.key],
                     }))
                   }
-                  checked={formValues.includeIngredients.includes(option.key)}
+                  checked={formValues[name].includes(option.key)}
                   className="absolute left-2 top-2 z-20 border-white data-[state=checked]:bg-white data-[state=checked]:text-slate-900"
                 />
                 <div className="absolute left-1/2 top-1/2 h-[calc(100%-2rem)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 p-4">

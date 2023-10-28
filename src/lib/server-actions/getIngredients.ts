@@ -7,7 +7,7 @@ async function getIngredients() {
 
   const { data, error } = await supabaseClient
     .from("ingredients")
-    .select("name, image_url");
+    .select("name, image_path");
 
   if (error) {
     throw new Error(error.message);
@@ -18,7 +18,7 @@ async function getIngredients() {
     key: item.name.toLowerCase(),
     imageUrl: supabaseClient.storage
       .from("ingredients")
-      .getPublicUrl(item.image_url).data.publicUrl,
+      .getPublicUrl(item.image_path).data.publicUrl,
   }));
 
   return formattedData;

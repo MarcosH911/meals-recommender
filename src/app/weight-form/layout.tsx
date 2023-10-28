@@ -11,7 +11,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const totalSteps = 9;
+const totalSteps = 15;
 
 function Layout({ children }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,12 +19,24 @@ function Layout({ children }: Props) {
     weight: "",
     desiredWeight: "",
     speed: "3",
+
     customizeMeals: "",
     mealTypes: { breakfast: true, lunch: true, dinner: true },
     maxCookingTime: "60",
-    includeIngredients: [""],
     excludeIngredients: [""],
     calorieDistribution: { breakfast: "0", lunch: "0", dinner: "0" },
+
+    customizeExercises: "",
+    includeExercises: [""],
+    exerciseDistribution: {
+      monday: "60",
+      tuesday: "60",
+      wednesday: "60",
+      thursday: "60",
+      friday: "60",
+      saturday: "60",
+      sunday: "60",
+    },
   });
 
   const formRef = useRef<HTMLFormElement>(null);

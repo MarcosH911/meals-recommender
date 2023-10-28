@@ -4,7 +4,7 @@ Change weight form transition
 
 Vim ctrl+j for ctrl+.
 
-Server actions Next.js 13
+Select at least one in mealTypes
 
 
 Weight input form:
