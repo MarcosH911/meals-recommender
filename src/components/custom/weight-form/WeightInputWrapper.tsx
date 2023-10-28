@@ -57,46 +57,46 @@ function WeightInputWrapper({
   };
 
   return (
-    <motion.div
-      initial={{ y: 10, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: -10, opacity: 0 }}
-      transition={{ duration: 0.2 }}
-    >
-      <div>
-        <Label className="text-3xl font-medium">{label}</Label>
+    // <motion.div
+    //   initial={{ y: 10, opacity: 0 }}
+    //   animate={{ y: 0, opacity: 1 }}
+    //   exit={{ y: -10, opacity: 0 }}
+    //   transition={{ duration: 0.2 }}
+    // >
+    <div>
+      <Label className="text-3xl font-medium">{label}</Label>
 
-        {children}
+      {children}
 
-        <Description>{description}</Description>
+      <Description>{description}</Description>
 
-        {errorMessage && (
-          <div className="mt-2 text-sm font-medium text-red-500">
-            {errorMessage}
-          </div>
-        )}
-
-        <div className="mt-6 flex items-center justify-between">
-          <Button
-            onClick={handlePreviousStep}
-            className={twMerge("group space-x-1", step === 1 && "invisible")}
-          >
-            <ArrowLeft className="h-5 transition group-hover:-translate-x-1" />
-            <span>Previous</span>
-          </Button>
-          <Button
-            onClick={handleNextStep}
-            disabled={formValues[name] === ""}
-            className={twMerge("group space-x-1")}
-          >
-            <span>{step === totalSteps ? "Submit" : "Next"}</span>
-            {step !== totalSteps && (
-              <ArrowRight className="h-5 transition group-hover:translate-x-1" />
-            )}
-          </Button>
+      {errorMessage && (
+        <div className="mt-2 text-sm font-medium text-red-500">
+          {errorMessage}
         </div>
+      )}
+
+      <div className="mt-6 flex items-center justify-between">
+        <Button
+          onClick={handlePreviousStep}
+          className={twMerge("group space-x-1", step === 1 && "invisible")}
+        >
+          <ArrowLeft className="h-5 transition group-hover:-translate-x-1" />
+          <span>Previous</span>
+        </Button>
+        <Button
+          onClick={handleNextStep}
+          disabled={formValues[name] === ""}
+          className={twMerge("group space-x-1")}
+        >
+          <span>{step === totalSteps ? "Submit" : "Next"}</span>
+          {step !== totalSteps && (
+            <ArrowRight className="h-5 transition group-hover:translate-x-1" />
+          )}
+        </Button>
       </div>
-    </motion.div>
+    </div>
+    // </motion.div>
   );
 }
 

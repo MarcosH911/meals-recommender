@@ -21,14 +21,6 @@ function WeightInputSelect({ name, options }: Props) {
   return (
     <ScrollArea type="always" className="mt-6 h-[min(40rem,calc(100vh-18rem))]">
       <div className="grid grid-cols-3 gap-2">
-        {/* {isLoading &&
-          Array(33)
-            .fill(true)
-            .map((_, index) => (
-              <AspectRatio key={index}>
-                <div className="h-full w-full animate-pulse rounded-lg bg-slate-400"></div>
-              </AspectRatio>
-            ))} */}
         {options.map(
           (
             option: { text: string; key: string; imageUrl: string },
