@@ -3,7 +3,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 async function getIngredients() {
   "use server";
