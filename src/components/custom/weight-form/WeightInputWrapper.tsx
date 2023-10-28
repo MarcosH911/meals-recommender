@@ -7,7 +7,7 @@ import WeightFormContext from "@/contexts/WeightFormContext";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface Props {
@@ -55,6 +55,11 @@ function WeightInputWrapper({
     e.preventDefault();
     router.push(`/weight-form/step/${step - 1}`);
   };
+
+  useEffect(() => {
+    router.prefetch(`/weight-form/step/${step + 1}`);
+    router.prefetch(`/weight-form/step/${step - 1}`);
+  }, [router, step]);
 
   return (
     // <motion.div
