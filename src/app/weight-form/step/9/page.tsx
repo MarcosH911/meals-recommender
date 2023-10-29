@@ -5,12 +5,12 @@ function Page() {
   return (
     <WeightInputWrapper
       step={9}
-      name="customizeWorkouts"
-      label="Do you want to customize your workouts?"
+      name="customizeExercises"
+      label="Do you want to customize your exercises?"
       description="You can always change them later."
     >
       <WeightInputOptions
-        name="customizeWorkouts"
+        name="customizeExercises"
         options={[
           { text: "Of course!", value: "true" },
           { text: "Some other time", value: "false" },

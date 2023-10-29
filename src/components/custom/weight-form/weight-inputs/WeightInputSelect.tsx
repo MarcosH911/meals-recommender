@@ -33,7 +33,7 @@ function WeightInputSelect({ name, options }: Props) {
                   formValues[name].includes(option.key) && "bg-slate-600",
                 )}
               >
-                <div className="absolute left-1/2 top-1/2 z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-lg bg-gradient-to-t from-slate-900/60 via-transparent to-transparent">
+                <div className="absolute left-1/2 top-1/2 z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 rounded-lg bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent">
                   <div className="absolute left-0 top-0 h-full w-full rounded-lg bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
                 </div>
                 <label
@@ -67,7 +67,7 @@ function WeightInputSelect({ name, options }: Props) {
                 </div>
                 <Label
                   htmlFor={"checkbox" + name + option.text + index}
-                  className="absolute bottom-1.5 left-1/2 z-20 -translate-x-1/2 text-lg text-white transition duration-300 group-hover:-translate-y-1"
+                  className="absolute bottom-1.5 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap text-center text-lg text-white transition duration-300 group-hover:-translate-y-1"
                 >
                   {option.text}
                 </Label>

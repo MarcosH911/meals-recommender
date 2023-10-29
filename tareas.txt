@@ -6,6 +6,8 @@ Vim ctrl+j for ctrl+.
 
 Select at least one in mealTypes
 
+Change all weight form steps to client components
+
 
 Weight input form:
 - Customize foods (boolean)

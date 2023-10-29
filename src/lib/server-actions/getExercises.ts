@@ -2,11 +2,11 @@
 
 import supabaseClient from "../supabaseClient";
 
-async function getIngredients() {
+async function getExercises() {
   "use server";
 
   const { data, error } = await supabaseClient
-    .from("ingredients")
+    .from("exercises")
     .select("name, image_path")
     .order("name");
 
@@ -19,11 +19,11 @@ async function getIngredients() {
     text: item.name,
     key: item.name.toLowerCase(),
     imageUrl: supabaseClient.storage
-      .from("ingredients")
+      .from("exercises")
       .getPublicUrl(item.image_path).data.publicUrl,
   }));
 
   return formattedData;
 }
 
-export default getIngredients;
+export default getExercises;
