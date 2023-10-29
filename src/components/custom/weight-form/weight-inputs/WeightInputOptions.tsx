@@ -16,7 +16,7 @@ function WeightInputOptions({ name, options }: Props) {
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
   return (
-    <div className="mt-6">
+    <div>
       <RadioGroup
         value={formValues[name]}
         onValueChange={(value) =>

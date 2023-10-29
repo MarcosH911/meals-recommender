@@ -18,7 +18,7 @@ function WeightInputText({ name, placeholder }: Props) {
 
   return (
     <div>
-      <div className="flex gap-2 py-4">
+      <div className="flex gap-2 pb-4">
         <Button
           variant={units === "lb" ? "secondary" : "ghost"}
           onClick={(e) => {

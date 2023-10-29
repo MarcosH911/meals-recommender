@@ -11,7 +11,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const totalSteps = 15;
+const totalSteps = 11;
 
 function Layout({ children }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -34,8 +34,8 @@ function Layout({ children }: Props) {
       wednesday: "60",
       thursday: "60",
       friday: "60",
-      saturday: "60",
-      sunday: "60",
+      saturday: "0",
+      sunday: "0",
     },
   });
 
@@ -43,7 +43,10 @@ function Layout({ children }: Props) {
 
   const step = useStep();
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    "use server";
+    console.log(formValues);
+  };
 
   return (
     <WeightFormContext.Provider
@@ -56,7 +59,7 @@ function Layout({ children }: Props) {
         setErrorMessage,
       }}
     >
-      <div className="mx-auto max-w-md py-8">
+      <div className="mx-auto max-w-md pt-8">
         <div>
           <Progress value={step * (100 / (totalSteps + 1))} className="mb-10" />
           <form onSubmit={handleSubmit} ref={formRef}>

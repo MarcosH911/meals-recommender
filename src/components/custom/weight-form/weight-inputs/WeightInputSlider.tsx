@@ -5,6 +5,7 @@ import { useContext } from "react";
 import WeightFormContext from "@/contexts/WeightFormContext";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@radix-ui/react-label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Props {
   options: {
@@ -21,9 +22,9 @@ function WeightInputSlider({ name, options }: Props) {
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
   return (
-    <div className="pt-6">
+    <div>
       {options.map((option, index) => (
-        <div key={index}>
+        <div key={index} className="mx-auto w-[calc(100%-0.5rem)]">
           {option.label && (
             <div className="-mb-2 mt-4">
               <Label className="font-medium">{option.label}</Label>

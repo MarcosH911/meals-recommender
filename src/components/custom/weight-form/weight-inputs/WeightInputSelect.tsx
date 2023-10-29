@@ -19,7 +19,7 @@ function WeightInputSelect({ name, options }: Props) {
   const { formValues, setFormValues } = useContext(WeightFormContext);
 
   return (
-    <ScrollArea type="always" className="mt-6 h-[min(40rem,calc(100vh-18rem))]">
+    <ScrollArea type="always" className="h-[min(40rem,calc(100vh-18rem))]">
       <div className="grid grid-cols-3 gap-2">
         {options.map(
           (

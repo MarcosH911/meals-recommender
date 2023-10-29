@@ -1,14 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import Description from "@/components/ui/description";
-import { Label } from "@/components/ui/label";
-import WeightFormContext from "@/contexts/WeightFormContext";
-import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
+
+import WeightFormContext from "@/contexts/WeightFormContext";
+import Description from "@/components/ui/description";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 interface Props {
   children: React.ReactNode;
@@ -43,7 +43,7 @@ function WeightInputWrapper({
   ) => {
     if (customHandleNextStep) return customHandleNextStep(e);
 
-    e.preventDefault();
+    if (step !== totalSteps) e.preventDefault();
     router.push(`/weight-form/step/${step + 1}`);
   };
 
@@ -62,16 +62,10 @@ function WeightInputWrapper({
   }, [router, step]);
 
   return (
-    // <motion.div
-    //   initial={{ y: 10, opacity: 0 }}
-    //   animate={{ y: 0, opacity: 1 }}
-    //   exit={{ y: -10, opacity: 0 }}
-    //   transition={{ duration: 0.2 }}
-    // >
     <div>
       <Label className="text-3xl font-medium">{label}</Label>
 
-      {children}
+      <div className="pt-6">{children}</div>
 
       <Description>{description}</Description>
 
@@ -101,7 +95,6 @@ function WeightInputWrapper({
         </Button>
       </div>
     </div>
-    // </motion.div>
   );
 }
 
