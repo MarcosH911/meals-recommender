@@ -3,3 +3,5 @@ Save form values to local storage
 Change weight form transition
 
 Vim ctrl+j for ctrl+.
+
+Insert weight form data to database

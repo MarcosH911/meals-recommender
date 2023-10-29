@@ -1,8 +1,8 @@
 "use server";
 
-import type weightFormValues from "@/types/weightFormValues";
 import { redirect } from "next/navigation";
-import toast from "react-hot-toast";
+
+import type weightFormValues from "@/types/weightFormValues";
 
 async function handleSubmitWeightForm(formValues: weightFormValues) {
   let error = false;
@@ -40,6 +40,8 @@ async function handleSubmitWeightForm(formValues: weightFormValues) {
   if (error) {
     redirect("/weight-form/step/1?error=true");
   }
+
+  // TODO: Insert to database
 
   redirect("/app");
 }
