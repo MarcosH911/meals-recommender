@@ -67,7 +67,7 @@ function Page() {
       step={8}
       name="calorieDistribution"
       label="How much do you want to eat in each meal?"
-      description="All values need to add up to 100."
+      description="Values need to add up to 100."
       customHandleNextStep={customHandleNextStep}
     >
       <WeightInputSlider

@@ -10,9 +10,6 @@ import Description from "@/components/ui/description";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
-import type weightFormValues from "@/types/weightFormValues";
-import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-
 interface Props {
   children: React.ReactNode;
   step: number;
@@ -45,6 +42,11 @@ function WeightInputWrapper({
 
     if (customHandleNextStep) return customHandleNextStep();
 
+    if (name === "includeExercises" && formValues[name].length === 0) {
+      setErrorMessage("You must select at least one exercise");
+      return;
+    }
+
     router.push(`/weight-form/step/${step + 1}`);
   };
 
@@ -61,7 +63,14 @@ function WeightInputWrapper({
   useEffect(() => {
     router.prefetch(`/weight-form/step/${step + 1}`);
     router.prefetch(`/weight-form/step/${step - 1}`);
-  }, [router, step]);
+
+    if (name === "customizeExercises") {
+      router.prefetch(`/weight-form/step/${step - 5}`);
+    }
+    if (name === "customizeMeals") {
+      router.prefetch(`/weight-form/step/${step + 5}`);
+    }
+  }, [name, router, step]);
 
   return (
     <div>
