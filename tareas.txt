@@ -3,22 +3,3 @@ Save form values to local storage
 Change weight form transition
 
 Vim ctrl+j for ctrl+.
-
-Select at least one in mealTypes
-
-Change all weight form steps to client components
-
-
-Weight input form:
-- Customize foods (boolean)
-- Meals: breakfast (boolean), lunch (boolean), dinner (boolean)
-- Max cooking time (number)
-- Include ingredients (array of strings)
-- Exclude ingredients (array of strings)
-- Calorie distribution per Meals
-
-- Customize exercises (boolean)
-- Include exercises: (array of strings)
-- Exclude exercises: (array of strings)
-- Exclude days: (Monday (boolean), Tuesday (boolean), Wednesday (boolean)...) ¿?
-- Time per day (number) ¿?

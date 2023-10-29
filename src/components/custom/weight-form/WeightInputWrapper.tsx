@@ -53,10 +53,11 @@ function WeightInputWrapper({
   const handlePreviousStep = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    if (customHandlePreviousStep) return customHandlePreviousStep();
-
     setErrorMessage("");
     e.preventDefault();
+
+    if (customHandlePreviousStep) return customHandlePreviousStep();
+
     router.push(`/weight-form/step/${step - 1}`);
   };
 

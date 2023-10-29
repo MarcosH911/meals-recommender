@@ -1,12 +1,12 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 import WeightInputWrapper from "@/components/custom/weight-form/WeightInputWrapper";
 import WeightInputOptions from "@/components/custom/weight-form/weight-inputs/WeightInputOptions";
 import WeightFormContext from "@/contexts/WeightFormContext";
 import useStep from "@/hooks/useStep";
 import handleSubmitWeightForm from "@/lib/server-actions/handleSubmitWeightForm";
-import { useRouter } from "next/navigation";
-import { useContext } from "react";
 
 function Page() {
   const { formValues, setErrorMessage } = useContext(WeightFormContext);
@@ -27,6 +27,15 @@ function Page() {
     }
   };
 
+  const customHandlePreviousStep = () => {
+    if (formValues.customizeMeals === "false") {
+      router.push(`/weight-form/step/${step - 5}`);
+      return;
+    }
+
+    router.push(`/weight-form/step/${step - 1}`);
+  };
+
   return (
     <WeightInputWrapper
       step={9}
@@ -34,6 +43,7 @@ function Page() {
       label="Do you want to customize your exercises?"
       description="You can always change them later."
       customHandleNextStep={customHandleNextStep}
+      customHandlePreviousStep={customHandlePreviousStep}
     >
       <WeightInputOptions
         name="customizeExercises"

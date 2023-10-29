@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import SWRProvider from "@/providers/SWRProvider";
+import ToasterProvider from "@/providers/ToasterProvider";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <SWRProvider>
-        <body>{children}</body>
-      </SWRProvider>
+      <body>
+        <SWRProvider>
+          <ToasterProvider />
+          {children}
+        </SWRProvider>
+      </body>
     </html>
   );
 }
