@@ -5,7 +5,6 @@ import { useContext } from "react";
 import WeightFormContext from "@/contexts/WeightFormContext";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@radix-ui/react-label";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Props {
   options: {
@@ -46,7 +45,7 @@ function WeightInputSlider({ name, options }: Props) {
               if (option.key) {
                 setFormValues((values) => ({
                   ...values,
-                  [name]: { [option.key!]: value.toString() },
+                  [name]: { ...values[name], [option.key!]: value.toString() },
                 }));
               } else {
                 setFormValues((values) => ({

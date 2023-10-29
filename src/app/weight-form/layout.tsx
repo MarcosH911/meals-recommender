@@ -23,11 +23,11 @@ function Layout({ children }: Props) {
     customizeMeals: "",
     mealTypes: { breakfast: true, lunch: true, dinner: true },
     maxCookingTime: "60",
-    excludeIngredients: [""],
+    excludeIngredients: [] as string[],
     calorieDistribution: { breakfast: "0", lunch: "0", dinner: "0" },
 
     customizeExercises: "",
-    includeExercises: [""],
+    includeExercises: [] as string[],
     exerciseDistribution: {
       monday: "60",
       tuesday: "60",
@@ -43,11 +43,6 @@ function Layout({ children }: Props) {
 
   const step = useStep();
 
-  const handleSubmit = () => {
-    "use server";
-    console.log(formValues);
-  };
-
   return (
     <WeightFormContext.Provider
       value={{
@@ -62,7 +57,7 @@ function Layout({ children }: Props) {
       <div className="mx-auto max-w-md pt-8">
         <div>
           <Progress value={step * (100 / (totalSteps + 1))} className="mb-10" />
-          <form onSubmit={handleSubmit} ref={formRef}>
+          <form ref={formRef}>
             <AnimatePresence mode="wait">{children}</AnimatePresence>
           </form>
         </div>

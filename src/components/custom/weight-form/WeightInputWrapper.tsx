@@ -10,18 +10,17 @@ import Description from "@/components/ui/description";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
+import type weightFormValues from "@/types/weightFormValues";
+import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+
 interface Props {
   children: React.ReactNode;
   step: number;
   name: string;
   label: string;
   description?: string | JSX.Element;
-  customHandleNextStep?: (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => void;
-  customHandlePreviousStep?: (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => void;
+  customHandleNextStep?: () => void;
+  customHandlePreviousStep?: () => void;
 }
 
 function WeightInputWrapper({
@@ -33,7 +32,7 @@ function WeightInputWrapper({
   customHandleNextStep,
   customHandlePreviousStep,
 }: Props) {
-  const { formValues, totalSteps, errorMessage } =
+  const { formValues, totalSteps, errorMessage, setErrorMessage } =
     useContext(WeightFormContext);
 
   const router = useRouter();
@@ -41,17 +40,20 @@ function WeightInputWrapper({
   const handleNextStep = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    if (customHandleNextStep) return customHandleNextStep(e);
+    setErrorMessage("");
+    e.preventDefault();
 
-    if (step !== totalSteps) e.preventDefault();
+    if (customHandleNextStep) return customHandleNextStep();
+
     router.push(`/weight-form/step/${step + 1}`);
   };
 
   const handlePreviousStep = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    if (customHandlePreviousStep) return customHandlePreviousStep(e);
+    if (customHandlePreviousStep) return customHandlePreviousStep();
 
+    setErrorMessage("");
     e.preventDefault();
     router.push(`/weight-form/step/${step - 1}`);
   };

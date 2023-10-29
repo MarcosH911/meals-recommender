@@ -3,12 +3,17 @@
 import WeightInputWrapper from "@/components/custom/weight-form/WeightInputWrapper";
 import WeightInputSlider from "@/components/custom/weight-form/weight-inputs/WeightInputSlider";
 import WeightFormContext from "@/contexts/WeightFormContext";
-import { useCallback, useContext } from "react";
+import useStep from "@/hooks/useStep";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 function Page() {
-  const { formValues } = useContext(WeightFormContext);
+  const { formValues, setErrorMessage } = useContext(WeightFormContext);
 
-  const getCalorieDistributionOptions = useCallback(() => {
+  const router = useRouter();
+  const step = useStep();
+
+  const getCalorieDistributionOptions = () => {
     const options = [];
     if (formValues.mealTypes.breakfast) {
       options.push({
@@ -38,13 +43,32 @@ function Page() {
       });
     }
     return options;
-  }, [formValues.mealTypes]);
+  };
+
+  const customHandleNextStep = () => {
+    const sum =
+      Number(formValues.calorieDistribution.breakfast) +
+      Number(formValues.calorieDistribution.lunch) +
+      Number(formValues.calorieDistribution.dinner);
+
+    if (sum > 100) {
+      setErrorMessage(`Values add up to ${sum}. Please, decrease some values.`);
+      return;
+    } else if (sum < 100) {
+      setErrorMessage(`Values add up to ${sum}. Please, increase some values.`);
+      return;
+    }
+
+    router.push(`/weight-form/step/${step + 1}`);
+  };
 
   return (
     <WeightInputWrapper
       step={8}
       name="calorieDistribution"
-      label="How many calories do you want to consume in each meal?"
+      label="How much do you want to eat in each meal?"
+      description="All values need to add up to 100."
+      customHandleNextStep={customHandleNextStep}
     >
       <WeightInputSlider
         name="calorieDistribution"

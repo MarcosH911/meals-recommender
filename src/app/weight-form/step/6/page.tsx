@@ -1,5 +1,3 @@
-"use client";
-
 import WeightInputWrapper from "@/components/custom/weight-form/WeightInputWrapper";
 import WeightInputSlider from "@/components/custom/weight-form/weight-inputs/WeightInputSlider";
 

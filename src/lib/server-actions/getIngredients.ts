@@ -3,8 +3,6 @@
 import supabaseClient from "../supabaseClient";
 
 async function getIngredients() {
-  "use server";
-
   const { data, error } = await supabaseClient
     .from("ingredients")
     .select("name, image_path")

@@ -3,8 +3,6 @@
 import supabaseClient from "../supabaseClient";
 
 async function getExercises() {
-  "use server";
-
   const { data, error } = await supabaseClient
     .from("exercises")
     .select("name, image_path")

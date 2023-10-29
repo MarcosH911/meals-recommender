@@ -1,14 +1,29 @@
+"use client";
+
 import WeightInputWrapper from "@/components/custom/weight-form/WeightInputWrapper";
 import WeightInputSlider from "@/components/custom/weight-form/weight-inputs/WeightInputSlider";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import WeightFormContext from "@/contexts/WeightFormContext";
+import handleSubmitWeightForm from "@/lib/server-actions/handleSubmitWeightForm";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 function Page() {
+  const { formValues } = useContext(WeightFormContext);
+
+  const router = useRouter();
+
+  const customHandleNextStep = () => {
+    handleSubmitWeightForm(formValues);
+  };
+
   return (
     <WeightInputWrapper
       step={11}
       name="exerciseDistribution"
       label="How much time do you want to exercise each day?"
       description="(minutes)"
+      customHandleNextStep={customHandleNextStep}
     >
       <ScrollArea type="auto" className="h-[min(40rem,calc(100vh-18rem))]">
         <WeightInputSlider

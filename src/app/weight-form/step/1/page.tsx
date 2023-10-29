@@ -14,15 +14,12 @@ function Page() {
   const router = useRouter();
   const step = useStep();
 
-  const customHandleNextStep = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
+  const customHandleNextStep = () => {
     if (Number(formValues.weight) < 1 || Number(formValues.weight) > 999) {
-      setErrorMessage("Weight must be between 1 and 999.");
+      setErrorMessage("Please, enter a valid weight");
       return;
     }
 
-    e.preventDefault();
     router.push(`/weight-form/step/${step + 1}`);
   };
 
