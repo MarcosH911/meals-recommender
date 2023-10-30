@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 import InitialFormContext from "@/contexts/InitialFormContext";
 import { Slider } from "@/components/ui/slider";
-import { Label } from "@radix-ui/react-label";
+import { Label } from "@/components/ui/label";
 
 interface Props {
   options: {
