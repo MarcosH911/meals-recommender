@@ -2,6 +2,7 @@ import React, { createContext } from "react";
 
 interface WeightFormContextTypes {
   formValues: {
+    units: string;
     weight: string;
     desiredWeight: string;
     speed: string;
@@ -29,6 +30,7 @@ interface WeightFormContextTypes {
 
   setFormValues: React.Dispatch<
     React.SetStateAction<{
+      units: string;
       weight: string;
       desiredWeight: string;
       speed: string;

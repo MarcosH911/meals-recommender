@@ -1,10 +1,11 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WeightFormContext from "@/contexts/WeightFormContext";
+import { KG_TO_LB } from "@/constants/constants";
 
 interface Props {
   name: string;
@@ -12,9 +13,9 @@ interface Props {
 }
 
 function WeightInputText({ name, placeholder }: Props) {
-  const [units, setUnits] = useState<"lb" | "kg">("lb");
-
   const { formValues, setFormValues } = useContext(WeightFormContext);
+
+  const [units, setUnits] = useState(formValues.units);
 
   return (
     <div>
@@ -24,6 +25,10 @@ function WeightInputText({ name, placeholder }: Props) {
           onClick={(e) => {
             e.preventDefault();
             setUnits("lb");
+            setFormValues((values) => ({
+              ...values,
+              units: "lb",
+            }));
           }}
         >
           lb
@@ -33,6 +38,10 @@ function WeightInputText({ name, placeholder }: Props) {
           onClick={(e) => {
             e.preventDefault();
             setUnits("kg");
+            setFormValues((values) => ({
+              ...values,
+              units: "kg",
+            }));
           }}
         >
           kg
@@ -45,7 +54,10 @@ function WeightInputText({ name, placeholder }: Props) {
         max={999}
         value={formValues[name]}
         onChange={(e) =>
-          setFormValues((values) => ({ ...values, [name]: e.target.value }))
+          setFormValues((values) => ({
+            ...values,
+            [name]: e.target.value,
+          }))
         }
         placeholder={
           units === "lb"

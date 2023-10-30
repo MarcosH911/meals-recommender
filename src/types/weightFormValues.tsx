@@ -1,4 +1,5 @@
 type weightFormValues = {
+  units: string;
   weight: string;
   desiredWeight: string;
   speed: string;

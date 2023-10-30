@@ -18,6 +18,7 @@ const totalSteps = 11;
 function Layout({ children }: Props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [formValues, setFormValues] = useState({
+    units: "lb",
     weight: "",
     desiredWeight: "",
     speed: "3",

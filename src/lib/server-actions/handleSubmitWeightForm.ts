@@ -3,11 +3,14 @@
 import { redirect } from "next/navigation";
 
 import type weightFormValues from "@/types/weightFormValues";
+import { KG_TO_LB } from "@/constants/constants";
 
 async function handleSubmitWeightForm(formValues: weightFormValues) {
   let error = false;
 
-  if (Number(formValues.weight) < 1 || Number(formValues.weight) > 999) {
+  if (formValues.units !== "lb" && formValues.units !== "kg") {
+    error = true;
+  } else if (Number(formValues.weight) < 1 || Number(formValues.weight) > 999) {
     error = true;
   } else if (
     Number(formValues.desiredWeight) < 1 ||
@@ -39,6 +42,12 @@ async function handleSubmitWeightForm(formValues: weightFormValues) {
 
   if (error) {
     redirect("/weight-form/step/1?error=true");
+  }
+
+  if (formValues.units === "kg") {
+    formValues.weight = String(
+      Math.round(Number(formValues.weight) * KG_TO_LB * 10) / 10,
+    );
   }
 
   // TODO: Insert to database

@@ -5,3 +5,6 @@ Change weight form transition
 Vim ctrl+j for ctrl+.
 
 Insert weight form data to database
+  From kg to lb
+
+Handle enter key in weight form

@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
@@ -34,32 +34,48 @@ function WeightInputWrapper({
 
   const router = useRouter();
 
-  const handleNextStep = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    setErrorMessage("");
-    e.preventDefault();
+  const handleNextStep = useCallback(
+    (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      setErrorMessage("");
+      if (e) e.preventDefault();
 
-    if (customHandleNextStep) return customHandleNextStep();
+      if (customHandleNextStep) return customHandleNextStep();
 
-    if (name === "includeExercises" && formValues[name].length === 0) {
-      setErrorMessage("You must select at least one exercise");
-      return;
-    }
+      if (name === "includeExercises" && formValues[name].length === 0) {
+        setErrorMessage("You must select at least one exercise");
+        return;
+      }
 
-    router.push(`/weight-form/step/${step + 1}`);
-  };
+      router.push(`/weight-form/step/${step + 1}`);
+    },
+    [customHandleNextStep, formValues, name, router, setErrorMessage, step],
+  );
 
   const handlePreviousStep = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     setErrorMessage("");
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     if (customHandlePreviousStep) return customHandlePreviousStep();
 
     router.push(`/weight-form/step/${step - 1}`);
   };
+
+  const handleEnterPress = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        handleNextStep();
+      }
+    },
+    [handleNextStep],
+  );
+
+  useEffect(() => {
+    window.addEventListener("keypress", handleEnterPress);
+
+    return () => window.removeEventListener("keypress", handleEnterPress);
+  }, [handleEnterPress]);
 
   useEffect(() => {
     router.prefetch(`/weight-form/step/${step + 1}`);
