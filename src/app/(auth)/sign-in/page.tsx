@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import handleSignIn from "@/lib/server-actions/auth/handleSignIn";
 
 function Page() {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ function Page() {
         <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4">
+        <form action={handleSignIn} className="space-y-4">
           {/* TODO: Continue with google */}
 
           <div className="space-y-1">
