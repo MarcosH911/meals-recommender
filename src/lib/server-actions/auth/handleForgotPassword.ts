@@ -1,32 +1,27 @@
 "use server";
 
-import { createServerClient } from "@supabase/ssr";
+import createServerClient from "@/utils/supabase/createServerClient";
 import { cookies } from "next/headers";
 
-import type { CookieOptions } from "@supabase/ssr";
-
-async function handleForgotPassword(email: string) {
+async function handleForgotPassword(formData: FormData) {
   const cookieStore = cookies();
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
-        },
-        set(name: string, value: string, options: CookieOptions) {
-          cookieStore.set({ name, value, ...options });
-        },
-        remove(name: string, options: CookieOptions) {
-          cookieStore.set({ name, value: "", ...options });
-        },
-      },
-    },
-  );
+  const supabase = createServerClient(cookieStore);
 
-  supabase.auth.resetPasswordForEmail(email);
+  const email = formData.get("email") as string | null;
+
+  if (!email) {
+    // TODO: Handle error
+    return;
+  }
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email);
+
+  if (error) {
+    // TODO: Handle error
+    console.error(error.message);
+    return;
+  }
 }
 
 export default handleForgotPassword;

@@ -17,8 +17,6 @@ import { Button } from "@/components/ui/button";
 import handleSignIn from "@/lib/server-actions/auth/handleSignIn";
 
 function Page() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -28,19 +26,12 @@ function Page() {
         <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form
-          action={() => handleSignIn(email, password)}
-          className="space-y-4"
-        >
+        <form action={handleSignIn} className="space-y-4">
           {/* TODO: Continue with google */}
 
           <div className="space-y-1">
             <Label>Email</Label>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="name@example.com"
-            />
+            <Input type="text" name="email" placeholder="name@example.com" />
           </div>
           <div className="space-y-1">
             <div className="flex items-center justify-between">
@@ -54,8 +45,7 @@ function Page() {
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
                 placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
               />
               <div

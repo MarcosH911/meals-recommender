@@ -16,8 +16,6 @@ import Link from "next/link";
 import { useState } from "react";
 
 function Page() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -27,27 +25,19 @@ function Page() {
         <CardDescription>Create a new account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form
-          action={() => handleSignUp(email, password)}
-          className="space-y-4"
-        >
+        <form action={handleSignUp} className="space-y-4">
           {/* TODO: Continue with google */}
 
           <div className="space-y-1">
             <Label>Email</Label>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="name@example.com"
-            />
+            <Input type="text" name="email" placeholder="name@example.com" />
           </div>
           <div className="space-y-1">
             <Label>Password</Label>
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                name="password"
                 placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
               />
               <div

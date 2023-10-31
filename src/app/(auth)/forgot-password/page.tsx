@@ -16,8 +16,6 @@ import { Label } from "@/components/ui/label";
 import handleForgotPassword from "@/lib/server-actions/auth/handleForgotPassword";
 
 function Page() {
-  const [email, setEmail] = useState("");
-
   return (
     <Card className="w-[25rem]">
       <CardHeader>
@@ -28,14 +26,10 @@ function Page() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={() => handleForgotPassword(email)} className="space-y-4">
+        <form action={handleForgotPassword} className="space-y-4">
           <div className="space-y-1">
             <Label>Email</Label>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="name@example.com"
-            />
+            <Input type="text" name="email" placeholder="name@example.com" />
           </div>
           <div className="pt-4">
             <Button className="w-full">Send Reset Email</Button>
