@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import handleForgotPassword from "@/lib/server-actions/auth/handleForgotPassword";
 
 function Page() {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ function Page() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4">
+        <form action={() => handleForgotPassword(email)} className="space-y-4">
           <div className="space-y-1">
             <Label>Email</Label>
             <Input

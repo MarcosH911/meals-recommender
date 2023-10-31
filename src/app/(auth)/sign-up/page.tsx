@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import handleSignUp from "@/lib/server-actions/auth/handleSignUp";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -26,7 +27,10 @@ function Page() {
         <CardDescription>Create a new account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="space-y-4">
+        <form
+          action={() => handleSignUp(email, password)}
+          className="space-y-4"
+        >
           {/* TODO: Continue with google */}
 
           <div className="space-y-1">
@@ -59,7 +63,7 @@ function Page() {
             </div>
           </div>
           <div className="pt-4">
-            <Button className="w-full">Sign in</Button>
+            <Button className="w-full">Sign Up</Button>
           </div>
           <div className="pt-5">
             <p className="text-center text-sm font-semibold text-slate-500">

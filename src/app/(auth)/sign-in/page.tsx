@@ -28,7 +28,10 @@ function Page() {
         <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={handleSignIn} className="space-y-4">
+        <form
+          action={() => handleSignIn(email, password)}
+          className="space-y-4"
+        >
           {/* TODO: Continue with google */}
 
           <div className="space-y-1">
@@ -68,7 +71,7 @@ function Page() {
             </div>
           </div>
           <div className="pt-4">
-            <Button className="w-full">Sign in</Button>
+            <Button className="w-full">Sign In</Button>
           </div>
           <div className="pt-5">
             <p className="text-center text-sm font-semibold text-slate-500">
