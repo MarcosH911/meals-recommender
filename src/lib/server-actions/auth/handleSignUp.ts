@@ -9,8 +9,8 @@ async function handleSignUp(formData: FormData) {
 
   const supabase = createServerClient(cookieStore);
 
-  const email = formData.get("email") as string | null;
-  const password = formData.get("password") as string | null;
+  const email = String(formData.get("email"));
+  const password = String(formData.get("password"));
 
   if (!email || !password) {
     // TODO: Handle error

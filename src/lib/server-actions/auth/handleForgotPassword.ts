@@ -8,7 +8,7 @@ async function handleForgotPassword(formData: FormData) {
 
   const supabase = createServerClient(cookieStore);
 
-  const email = formData.get("email") as string | null;
+  const email = String(formData.get("email"));
 
   if (!email) {
     // TODO: Handle error
