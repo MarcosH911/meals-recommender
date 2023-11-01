@@ -1,3 +1,4 @@
+import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 import SWRProvider from "@/providers/SWRProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
@@ -16,10 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-slate-100">
         <SWRProvider>
-          <ToasterProvider />
-          {children}
+          <TooltipProvider>
+            <ToasterProvider />
+            {children}
+          </TooltipProvider>
         </SWRProvider>
       </body>
     </html>
