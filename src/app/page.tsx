@@ -1,7 +1,7 @@
 // Spoontacular
 
 function Page() {
-  return <div className="mx-auto max-w-md py-8"></div>;
+  return <div>Lose weight without bullsh*t</div>;
 }
 
 export default Page;
