@@ -1,6 +1,7 @@
-import createServerClient from "@/utils/supabase/createServerClient";
-import { cookies } from "next/headers";
 import Link from "next/link";
+import { cookies } from "next/headers";
+
+import createServerClient from "@/utils/supabase/createServerClient";
 
 interface Props {
   children: React.ReactNode;
@@ -9,7 +10,9 @@ interface Props {
 async function Layout({ children }: Props) {
   const cookieStore = cookies();
   const supabase = createServerClient(cookieStore);
-  const { data: session } = await supabase.auth.getSession();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   return (
     <div className="relative">
