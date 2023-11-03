@@ -12,7 +12,7 @@ import {
 
 interface Props {
   icon: React.ReactNode;
-  label: string;
+  label?: string;
   href: string;
 }
 
@@ -33,15 +33,17 @@ function SidebarItem({ icon, label, href }: Props) {
           </div>
         </Link>
       </TooltipTrigger>
-      <TooltipContent
-        side="right"
-        sideOffset={10}
-        className="relative overflow-visible"
-      >
-        <div className="absolute left-0 top-1/2 z-10 -translate-x-full -translate-y-1/2 border-y-[0.35rem] border-r-[0.60rem] border-transparent border-r-white"></div>
-        <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 border-y-[0.43rem] border-r-[0.74rem] border-transparent border-r-slate-200"></div>
-        {label}
-      </TooltipContent>
+      {label && (
+        <TooltipContent
+          side="right"
+          sideOffset={10}
+          className="relative overflow-visible"
+        >
+          <div className="absolute left-0 top-1/2 z-10 -translate-x-full -translate-y-1/2 border-y-[0.35rem] border-r-[0.60rem] border-transparent border-r-white"></div>
+          <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 border-y-[0.43rem] border-r-[0.74rem] border-transparent border-r-slate-200"></div>
+          {label}
+        </TooltipContent>
+      )}
     </Tooltip>
   );
 }
