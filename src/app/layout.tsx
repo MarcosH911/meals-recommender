@@ -4,6 +4,7 @@ import SWRProvider from "@/providers/SWRProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 
 import type { Metadata } from "next";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,13 +17,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-slate-100">
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-slate-100 dark:bg-slate-950">
         <SWRProvider>
-          <TooltipProvider>
-            <ToasterProvider />
-            {children}
-          </TooltipProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TooltipProvider>
+              <ToasterProvider />
+              {children}
+            </TooltipProvider>
+          </ThemeProvider>
         </SWRProvider>
       </body>
     </html>

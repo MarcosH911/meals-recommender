@@ -4,6 +4,8 @@ Change weight form transition
 
 Continue with google sign-in and sign-up
 
+Redirect after sign in/up/out
+
 Insert weight form data to database
   From kg to lb
   Insert exercises
