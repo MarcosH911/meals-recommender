@@ -8,6 +8,7 @@ import {
 
 import SidebarItem from "./SidebarItem";
 import { Separator } from "@/components/ui/separator";
+import UserSidebarItem from "./UserSidebarItem";
 
 function Sidebar() {
   return (
@@ -35,9 +36,7 @@ function Sidebar() {
           />
         </div>
       </div>
-      <div>
-        <SidebarItem icon={<User2Icon />} label="" href="/app/" />
-      </div>
+      <UserSidebarItem />
     </div>
   );
 }
