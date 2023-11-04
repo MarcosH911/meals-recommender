@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import handleSignIn from "@/lib/server-actions/auth/handleSignIn";
+import GoogleSignInButton from "./GoogleSignInButton";
 
 function Page() {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,6 +29,7 @@ function Page() {
       <CardContent>
         <form action={handleSignIn} className="flex flex-col gap-4">
           {/* TODO: Continue with google */}
+          <GoogleSignInButton />
 
           <div className="space-y-1">
             <Label>Email</Label>
