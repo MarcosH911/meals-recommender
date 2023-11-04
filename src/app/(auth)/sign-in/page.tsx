@@ -26,18 +26,23 @@ function Page() {
         <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={handleSignIn} className="space-y-4">
+        <form action={handleSignIn} className="flex flex-col gap-4">
           {/* TODO: Continue with google */}
 
           <div className="space-y-1">
             <Label>Email</Label>
-            <Input type="text" name="email" placeholder="name@example.com" />
+            <Input
+              type="text"
+              name="email"
+              placeholder="name@example.com"
+              className="dark:bg-transparent"
+            />
           </div>
           <div className="space-y-1">
             <div className="flex items-center justify-between">
-              <Label>Password</Label>
-              <Link href="/forgot-password">
-                <span className="text-sm font-semibold text-slate-500 hover:underline">
+              <Label className="-mb-0.5">Password</Label>
+              <Link href="/forgot-password" className="group">
+                <span className="text-sm text-slate-500 group-hover:underline dark:text-slate-400">
                   Forgot password?
                 </span>
               </Link>
@@ -47,6 +52,7 @@ function Page() {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                className="dark:bg-transparent"
               />
               <div
                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
@@ -64,10 +70,10 @@ function Page() {
             <Button className="w-full">Sign In</Button>
           </div>
           <div className="pt-5">
-            <p className="text-center text-sm font-semibold text-slate-500">
+            <p className="text-center text-sm font-semibold text-slate-500 dark:text-slate-400">
               Don&apos;t have an account?{" "}
               <Link href="/sign-up">
-                <span className="text-slate-950 underline transition duration-100 hover:text-slate-500">
+                <span className="text-slate-950 underline transition duration-100 hover:text-slate-500 dark:text-slate-100 dark:hover:text-slate-400">
                   Sign Up Now
                 </span>
               </Link>

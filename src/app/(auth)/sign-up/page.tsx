@@ -25,12 +25,17 @@ function Page() {
         <CardDescription>Create a new account</CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={handleSignUp} className="space-y-4">
+        <form action={handleSignUp} className="flex flex-col gap-4">
           {/* TODO: Continue with google */}
 
           <div className="space-y-1">
             <Label>Email</Label>
-            <Input type="text" name="email" placeholder="name@example.com" />
+            <Input
+              type="text"
+              name="email"
+              placeholder="name@example.com"
+              className="dark:bg-transparent"
+            />
           </div>
           <div className="space-y-1">
             <Label>Password</Label>
@@ -39,6 +44,7 @@ function Page() {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                className="dark:bg-transparent"
               />
               <div
                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
@@ -56,10 +62,10 @@ function Page() {
             <Button className="w-full">Sign Up</Button>
           </div>
           <div className="pt-5">
-            <p className="text-center text-sm font-semibold text-slate-500">
+            <p className="text-center text-sm font-semibold text-slate-500 dark:text-slate-400">
               Have an account?{" "}
               <Link href="/sign-in">
-                <span className="text-slate-950 underline transition duration-100 hover:text-slate-500">
+                <span className="text-slate-950 underline transition duration-100 hover:text-slate-500 dark:text-slate-100 dark:hover:text-slate-400">
                   Sign In Now
                 </span>
               </Link>
