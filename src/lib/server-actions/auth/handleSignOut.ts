@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 
 import createServerClient from "@/utils/supabase/createServerClient";
+import { redirect } from "next/navigation";
 
 async function handleSignOut() {
   const cookieStore = cookies();
@@ -13,6 +14,8 @@ async function handleSignOut() {
   if (error) {
     // TODO
   }
+
+  redirect("/sign-in");
 }
 
 export default handleSignOut;
