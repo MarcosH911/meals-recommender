@@ -33,7 +33,7 @@ function Page() {
               type="text"
               name="email"
               placeholder="name@example.com"
-              className="dark:bg-transparent"
+              className="dark:bg-slate-900"
             />
           </div>
           <div className="pt-4">

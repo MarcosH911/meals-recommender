@@ -5,27 +5,27 @@ import { cookies } from "next/headers";
 import createServerClient from "@/utils/supabase/createServerClient";
 
 async function handleSignUp(formData: FormData) {
-  const cookieStore = cookies();
+  try {
+    const cookieStore = cookies();
 
-  const supabase = createServerClient(cookieStore);
+    const supabase = createServerClient(cookieStore);
 
-  const email = String(formData.get("email"));
-  const password = String(formData.get("password"));
+    const email = String(formData.get("email"));
+    const password = String(formData.get("password"));
 
-  if (!email || !password) {
-    // TODO: Handle error
-    return;
-  }
+    if (!email || !password) {
+      // TODO: Handle error
+      return;
+    }
 
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-  });
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
 
-  if (error) {
-    // TODO: Handle error
-    console.error(error.message);
-    return;
+    if (error) throw new Error(error.message);
+  } catch (error) {
+    console.error(error);
   }
 }
 

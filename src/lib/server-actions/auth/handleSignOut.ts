@@ -1,21 +1,23 @@
 "use server";
 
 import { cookies } from "next/headers";
-
-import createServerClient from "@/utils/supabase/createServerClient";
 import { redirect } from "next/navigation";
 
+import createServerClient from "@/utils/supabase/createServerClient";
+
 async function handleSignOut() {
-  const cookieStore = cookies();
-  const supabase = createServerClient(cookieStore);
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerClient(cookieStore);
 
-  const { error } = await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
 
-  if (error) {
-    // TODO
+    if (error) throw new Error(error.message);
+
+    redirect("/sign-in");
+  } catch (error) {
+    console.log(error);
   }
-
-  redirect("/sign-in");
 }
 
 export default handleSignOut;

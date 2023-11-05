@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 
 import createServerClient from "@/utils/supabase/createServerClient";
+import SignOutButton from "@/components/custom/auth/SignOutButton";
 
 interface Props {
   children: React.ReactNode;
@@ -28,7 +29,7 @@ async function Layout({ children }: Props) {
           </div>
         ) : (
           <div className="absolute right-10 flex h-full items-center justify-center gap-8">
-            <button>Sign Out</button>
+            <SignOutButton />
           </div>
         )}
       </div>

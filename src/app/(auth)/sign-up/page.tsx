@@ -34,7 +34,7 @@ function Page() {
               type="text"
               name="email"
               placeholder="name@example.com"
-              className="dark:bg-transparent"
+              className="dark:bg-slate-900"
             />
           </div>
           <div className="space-y-1">
@@ -44,7 +44,7 @@ function Page() {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                className="dark:bg-transparent"
+                className="dark:bg-slate-900"
               />
               <div
                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
