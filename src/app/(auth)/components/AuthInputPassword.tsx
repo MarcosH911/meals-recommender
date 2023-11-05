@@ -10,6 +10,7 @@ function AuthInputPassword() {
   return (
     <div className="relative">
       <Input
+        required
         type={showPassword ? "text" : "password"}
         name="password"
         placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"

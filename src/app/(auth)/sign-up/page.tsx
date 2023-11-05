@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import AuthErrorMessage from "../components/AuthErrorMessage";
 
 function Page() {
   return (
@@ -39,6 +40,7 @@ function Page() {
           <div className="space-y-1">
             <Label>Email</Label>
             <Input
+              required
               type="email"
               name="email"
               placeholder="name@example.com"
@@ -49,6 +51,7 @@ function Page() {
             <Label>Password</Label>
             <AuthInputPassword />
           </div>
+          <AuthErrorMessage />
           <AuthButtonSubmit>Sign Up</AuthButtonSubmit>
           <div className="pt-5">
             <p className="text-center text-sm font-semibold text-slate-500 dark:text-slate-400">

@@ -3,32 +3,32 @@
 import { cookies } from "next/headers";
 
 import createServerClient from "@/utils/supabase/createServerClient";
+import { RedirectType, redirect } from "next/navigation";
 
 async function handleSignIn(formData: FormData) {
-  try {
-    const cookieStore = cookies();
-    const supabase = createServerClient(cookieStore);
+  const cookieStore = cookies();
+  const supabase = createServerClient(cookieStore);
 
-    const email = String(formData.get("email"));
-    const password = String(formData.get("password"));
+  const email = String(formData.get("email"));
+  const password = String(formData.get("password"));
 
-    if (!email || !password) {
-      // TODO: Handle error
-      return;
-    }
+  if (!email || !password) {
+    redirect(
+      "/sign-in?error=You must enter email and password",
+      RedirectType.replace,
+    );
+  }
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
-    if (error) {
-      // TODO: Handle error
-      console.error(error.message);
-      return;
-    }
-  } catch (error) {
-    console.error(error);
+  if (error) {
+    redirect(
+      `/sign-in?error=Incorrect email or password`,
+      RedirectType.replace,
+    );
   }
 }
 

@@ -6,6 +6,8 @@ Continue with google sign-in and sign-up
 
 Redirect after sign in/up/out
 
+Toaster provider to show toast from server
+
 Insert weight form data to database
   From kg to lb
   Insert exercises

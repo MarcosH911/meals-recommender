@@ -40,6 +40,7 @@ function Page() {
           <div className="space-y-1">
             <Label>Email</Label>
             <Input
+              required
               type="email"
               name="email"
               placeholder="name@example.com"
@@ -49,7 +50,7 @@ function Page() {
           <div className="space-y-1">
             <div className="flex items-center justify-between">
               <Label className="-mb-0.5">Password</Label>
-              <Link href="/forgot-password" className="group">
+              <Link href="/forgot-password" className="group" tabIndex={-1}>
                 <span className="text-sm text-slate-500 group-hover:underline dark:text-slate-400">
                   Forgot password?
                 </span>
@@ -57,7 +58,7 @@ function Page() {
             </div>
             <AuthInputPassword />
           </div>
-          {/* <AuthErrorMessage /> */}
+          <AuthErrorMessage />
           <AuthButtonSubmit>Sign In</AuthButtonSubmit>
           <div className="pt-5">
             <p className="text-center text-sm font-semibold text-slate-500 dark:text-slate-400">
