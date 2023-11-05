@@ -27,9 +27,8 @@ function Page() {
           <GoogleAuthButton />
 
           <div className="relative mt-2.5 flex py-1">
-            <div className="absolute left-0 top-1/2 flex w-[43%] -translate-y-1/2 items-center border-t dark:border-slate-800"></div>
-            <div className="absolute right-0 top-1/2 flex w-[43%] -translate-y-1/2 items-center border-t dark:border-slate-800"></div>
-            <div className="absolute inset-0 flex items-center"></div>
+            <div className="absolute left-0 top-1/2 flex w-[43%] -translate-y-1/2 items-center border-t border-slate-300 dark:border-slate-800"></div>
+            <div className="absolute right-0 top-1/2 flex w-[43%] -translate-y-1/2 items-center border-t border-slate-300 dark:border-slate-800"></div>
             <div className="relative flex w-full justify-center">
               <span className="text-xs font-semibold uppercase dark:text-slate-400">
                 or
