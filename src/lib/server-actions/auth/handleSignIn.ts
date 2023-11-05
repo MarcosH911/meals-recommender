@@ -6,7 +6,6 @@ import createServerClient from "@/utils/supabase/createServerClient";
 
 async function handleSignIn(formData: FormData) {
   const cookieStore = cookies();
-
   const supabase = createServerClient(cookieStore);
 
   const email = String(formData.get("email"));

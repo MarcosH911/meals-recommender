@@ -8,15 +8,18 @@ export async function GET(request: Request) {
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
 
+  console.log("AAA");
+
   if (code) {
     const cookieStore = cookies();
     const supabase = createServerClient(cookieStore);
 
     const { error } = await supabase.auth.exchangeCodeForSession(code);
+
     if (!error) {
-      return NextResponse.redirect(next);
+      return NextResponse.redirect(new URL(next, request.url));
     }
   }
 
-  return NextResponse.redirect("/auth/auth-code-error");
+  return NextResponse.redirect(new URL("/auth/auth-code-error", request.url));
 }
