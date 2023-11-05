@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import AuthErrorMessage from "../components/AuthErrorMessage";
 
 function Page() {
   return (
@@ -56,6 +57,7 @@ function Page() {
             </div>
             <AuthInputPassword />
           </div>
+          {/* <AuthErrorMessage /> */}
           <AuthButtonSubmit>Sign In</AuthButtonSubmit>
           <div className="pt-5">
             <p className="text-center text-sm font-semibold text-slate-500 dark:text-slate-400">
