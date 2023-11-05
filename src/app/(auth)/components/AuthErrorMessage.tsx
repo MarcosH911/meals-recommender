@@ -27,7 +27,7 @@ function AuthErrorMessage() {
 
   if (!errorMessage) return null;
 
-  return <div className="text-sm text-red-600">{errorMessage}</div>;
+  return <div className="-mb-2 mt-1 text-sm text-red-600">{errorMessage}</div>;
 }
 
 export default AuthErrorMessage;

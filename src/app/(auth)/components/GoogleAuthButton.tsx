@@ -23,7 +23,7 @@ function GoogleAuthButton() {
 
       if (error) throw new Error(error.message);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

@@ -30,6 +30,8 @@ async function handleSignIn(formData: FormData) {
       RedirectType.replace,
     );
   }
+
+  // TODO: Handle redirect
 }
 
 export default handleSignIn;

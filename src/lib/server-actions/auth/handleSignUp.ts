@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 
 import createServerClient from "@/utils/supabase/createServerClient";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 
 async function handleSignUp(formData: FormData) {
   const cookieStore = cookies();
@@ -13,15 +13,24 @@ async function handleSignUp(formData: FormData) {
   const password = String(formData.get("password"));
 
   if (!email || !password) {
-    redirect("/sign-up?error=You must enter an email and a password");
+    redirect(
+      "/sign-up?error=You must enter an email and a password",
+      RedirectType.replace,
+    );
   }
 
   if (password.length < 6) {
-    redirect("/sign-up?error=Password must be at least 6 characters");
+    redirect(
+      "/sign-up?error=Password must be at least 6 characters",
+      RedirectType.replace,
+    );
   }
 
   if (password.length > 72) {
-    redirect("/sign-up?error=Password must be at most 72 characters");
+    redirect(
+      "/sign-up?error=Password must be at most 72 characters",
+      RedirectType.replace,
+    );
   }
 
   const { data, error } = await supabase.auth.signUp({
@@ -33,13 +42,14 @@ async function handleSignUp(formData: FormData) {
   });
 
   if (error) {
-    console.error(error);
-    redirect(`/sign-up?error=Something went wrong`);
-    // TODO: Make it toast
+    redirect("/sign-up?toastError=Something went wrong", RedirectType.replace);
   }
 
   if (data.user?.identities?.length === 0) {
-    redirect(`/sign-up?error=This email is already in use`);
+    redirect(
+      "/sign-up?error=This email is already in use",
+      RedirectType.replace,
+    );
   }
 
   redirect("/confirm-email");

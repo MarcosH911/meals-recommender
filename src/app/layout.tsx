@@ -1,10 +1,8 @@
-import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
-import SWRProvider from "@/providers/SWRProvider";
-import ToasterProvider from "@/providers/ToasterProvider";
+
+import Providers from "@/providers/Providers";
 
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,19 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-slate-100 dark:bg-slate-950">
-        <SWRProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <TooltipProvider>
-              <ToasterProvider />
-              {children}
-            </TooltipProvider>
-          </ThemeProvider>
-        </SWRProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
