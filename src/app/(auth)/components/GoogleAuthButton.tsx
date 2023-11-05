@@ -6,7 +6,7 @@ import { LoaderIcon } from "lucide-react";
 import GoogleIcon from "@/components/custom/logos/googleIcon";
 import createBrowserClient from "@/utils/supabase/createBrowserClient";
 
-function GoogleSignInButton() {
+function GoogleAuthButton() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignInWithGoogle = async () => {
@@ -37,9 +37,9 @@ function GoogleSignInButton() {
       ) : (
         <GoogleIcon className="h-4.5 w-4.5 brightness-0 invert" />
       )}
-      <span>Sign in with Google</span>
+      <span>Continue with Google</span>
     </button>
   );
 }
 
-export default GoogleSignInButton;
+export default GoogleAuthButton;

@@ -1,9 +1,9 @@
-"use client";
-
 import Link from "next/link";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { useState } from "react";
 
+import GoogleAuthButton from "@/app/(auth)/components/GoogleAuthButton";
+import handleSignIn from "@/lib/server-actions/auth/handleSignIn";
+import AuthButtonSubmit from "../components/AuthButtonSubmit";
+import AuthInputPassword from "../components/AuthInputPassword";
 import {
   Card,
   CardContent,
@@ -13,28 +13,33 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import handleSignIn from "@/lib/server-actions/auth/handleSignIn";
-import GoogleSignInButton from "./GoogleSignInButton";
 
 function Page() {
-  const [showPassword, setShowPassword] = useState(false);
-
   return (
     <Card className="w-[25rem]">
-      <CardHeader>
+      <CardHeader className="mb-4">
         <CardTitle className="mb-2">Welcome back</CardTitle>
         <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <CardContent>
         <form action={handleSignIn} className="flex flex-col gap-4">
-          {/* TODO: Continue with google */}
-          <GoogleSignInButton />
+          <GoogleAuthButton />
+
+          <div className="relative mt-2.5 flex py-1">
+            <div className="absolute left-0 top-1/2 flex w-[43%] -translate-y-1/2 items-center border-t dark:border-slate-800"></div>
+            <div className="absolute right-0 top-1/2 flex w-[43%] -translate-y-1/2 items-center border-t dark:border-slate-800"></div>
+            <div className="absolute inset-0 flex items-center"></div>
+            <div className="relative flex w-full justify-center">
+              <span className="text-xs font-semibold uppercase dark:text-slate-400">
+                or
+              </span>
+            </div>
+          </div>
 
           <div className="space-y-1">
             <Label>Email</Label>
             <Input
-              type="text"
+              type="email"
               name="email"
               placeholder="name@example.com"
               className="dark:bg-slate-900"
@@ -49,28 +54,9 @@ function Page() {
                 </span>
               </Link>
             </div>
-            <div className="relative">
-              <Input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-                className="dark:bg-slate-900"
-              />
-              <div
-                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
-                onClick={() => setShowPassword((show) => !show)}
-              >
-                {showPassword ? (
-                  <EyeOffIcon className="h-4.5 w-4.5" />
-                ) : (
-                  <EyeIcon className="h-4.5 w-4.5" />
-                )}
-              </div>
-            </div>
+            <AuthInputPassword />
           </div>
-          <div className="pt-4">
-            <Button className="w-full">Sign In</Button>
-          </div>
+          <AuthButtonSubmit>Sign In</AuthButtonSubmit>
           <div className="pt-5">
             <p className="text-center text-sm font-semibold text-slate-500 dark:text-slate-400">
               Don&apos;t have an account?{" "}

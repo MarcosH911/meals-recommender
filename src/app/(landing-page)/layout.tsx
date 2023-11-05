@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 
 import createServerClient from "@/utils/supabase/createServerClient";
-import SignOutButton from "@/components/custom/auth/SignOutButton";
+import SignOutButton from "@/components/custom/SignOutButton";
 
 interface Props {
   children: React.ReactNode;

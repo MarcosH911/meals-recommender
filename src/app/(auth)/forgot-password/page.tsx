@@ -1,8 +1,7 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
 
+import handleForgotPassword from "@/lib/server-actions/auth/handleForgotPassword";
+import AuthButtonSubmit from "../components/AuthButtonSubmit";
 import {
   Card,
   CardContent,
@@ -10,15 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import handleForgotPassword from "@/lib/server-actions/auth/handleForgotPassword";
 
 function Page() {
   return (
     <Card className="w-[25rem]">
-      <CardHeader>
+      <CardHeader className="mb-4">
         <CardTitle className="mb-2">Reset Your Password</CardTitle>
         <CardDescription>
           Type in your email and we&apos;ll send you a link to reset your
@@ -30,15 +27,13 @@ function Page() {
           <div className="space-y-1">
             <Label>Email</Label>
             <Input
-              type="text"
+              type="email"
               name="email"
               placeholder="name@example.com"
               className="dark:bg-slate-900"
             />
           </div>
-          <div className="pt-4">
-            <Button className="w-full">Send Reset Email</Button>
-          </div>
+          <AuthButtonSubmit>Send Reset Email</AuthButtonSubmit>
           <div className="pt-5">
             <p className="text-center text-sm font-semibold text-slate-500 dark:text-slate-400">
               Already have an account?{" "}
