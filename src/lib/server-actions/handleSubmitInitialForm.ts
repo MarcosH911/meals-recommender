@@ -42,8 +42,7 @@ async function handleSubmitInitialForm(formValues: InitialFormValues) {
   }
 
   if (error) {
-    // TODO: Toast
-    return;
+    redirect("/initial-form/step/1?toastError=Something went wrong");
   }
 
   if (formValues.units === "kg") {

@@ -1,9 +1,7 @@
 "use client";
 
-import toast from "react-hot-toast";
 import { AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { redirect, useSearchParams } from "next/navigation";
+import { useRef, useState } from "react";
 
 import InitialFormContext from "@/contexts/InitialFormContext";
 
@@ -46,14 +44,6 @@ function Layout({ children }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
 
   const step = useStep();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    if (searchParams.get("error") === "true") {
-      toast.error("Something went wrong");
-      redirect("/initial-form/step/1");
-    }
-  }, [searchParams]);
 
   return (
     <InitialFormContext.Provider
