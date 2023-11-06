@@ -107,7 +107,7 @@ function InitialFormInputWrapper({
         <Button
           onClick={handlePreviousStep}
           className={twMerge(
-            "group space-x-1 dark:bg-orange-500 dark:text-orange-50 dark:hover:bg-orange-600",
+            "group space-x-1 bg-orange-500 text-orange-50 hover:bg-orange-600 dark:bg-orange-500 dark:text-orange-50 dark:hover:bg-orange-400",
             step === 1 && "invisible",
           )}
         >
@@ -117,7 +117,7 @@ function InitialFormInputWrapper({
         <Button
           onClick={handleNextStep}
           disabled={formValues[name] === ""}
-          className="group space-x-1 dark:bg-orange-500 dark:text-orange-50 dark:hover:bg-orange-600"
+          className="group space-x-1 bg-orange-500 text-orange-50 hover:bg-orange-600 dark:bg-orange-500 dark:text-orange-50 dark:hover:bg-orange-400"
         >
           <span>{step === totalSteps ? "Submit" : "Next"}</span>
           {step !== totalSteps && (
