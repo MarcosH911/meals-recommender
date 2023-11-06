@@ -1,17 +1,15 @@
 "use client";
 
+import { useContext } from "react";
+
 import InitialFormInputWrapper from "@/components/custom/initial-form/InitialFormInputWrapper";
 import InitialFormInputSlider from "@/components/custom/initial-form/inputs/InitialFormInputSlider";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import InitialFormContext from "@/contexts/InitialFormContext";
 import handleSubmitInitialForm from "@/lib/server-actions/handleSubmitInitialForm";
-import { useRouter } from "next/navigation";
-import { useContext } from "react";
 
 function Page() {
   const { formValues } = useContext(InitialFormContext);
-
-  const router = useRouter();
 
   const customHandleNextStep = () => {
     handleSubmitInitialForm(formValues);

@@ -11,7 +11,7 @@ async function Page() {
       name="includeExercises"
       label="Select the exercises you are willing to do"
     >
-      <InitialFormInputSelect name="includeExercises" options={options} />
+      <InitialFormInputSelect name="includeExercises" options={options || []} />
     </InitialFormInputWrapper>
   );
 }

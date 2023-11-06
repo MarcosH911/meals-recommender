@@ -11,7 +11,10 @@ async function Page() {
       name="excludeIngredients"
       label="Select the ingredients you don't like"
     >
-      <InitialFormInputSelect name="excludeIngredients" options={options} />
+      <InitialFormInputSelect
+        name="excludeIngredients"
+        options={options || []}
+      />
     </InitialFormInputWrapper>
   );
 }

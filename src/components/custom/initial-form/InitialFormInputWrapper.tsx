@@ -98,7 +98,7 @@ function InitialFormInputWrapper({
       <Description>{description}</Description>
 
       {errorMessage && (
-        <div className="mt-2 text-sm font-medium text-red-500">
+        <div className="mt-2 text-sm font-medium text-red-500 dark:text-red-600">
           {errorMessage}
         </div>
       )}
@@ -106,7 +106,10 @@ function InitialFormInputWrapper({
       <div className="mt-6 flex items-center justify-between">
         <Button
           onClick={handlePreviousStep}
-          className={twMerge("group space-x-1", step === 1 && "invisible")}
+          className={twMerge(
+            "group space-x-1 dark:bg-orange-500 dark:text-orange-50 dark:hover:bg-orange-600",
+            step === 1 && "invisible",
+          )}
         >
           <ArrowLeft className="h-5 transition group-hover:-translate-x-1" />
           <span>Previous</span>
@@ -114,7 +117,7 @@ function InitialFormInputWrapper({
         <Button
           onClick={handleNextStep}
           disabled={formValues[name] === ""}
-          className={twMerge("group space-x-1")}
+          className="group space-x-1 dark:bg-orange-500 dark:text-orange-50 dark:hover:bg-orange-600"
         >
           <span>{step === totalSteps ? "Submit" : "Next"}</span>
           {step !== totalSteps && (

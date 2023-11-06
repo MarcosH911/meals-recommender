@@ -73,8 +73,8 @@ function Layout({ children }: Props) {
               value={step * (100 / (totalSteps + 1))}
               className="mb-10"
             />
-            <div className="absolute left-[calc(100%/12*4)] top-1/2 h-[0.575rem] w-[0.575rem] -translate-x-1/2 -translate-y-1/2 rotate-[45deg] skew-x-[10deg] skew-y-[10deg] bg-slate-500"></div>
-            <div className="absolute left-[calc(100%/12*9)] top-1/2 h-[0.575rem] w-[0.575rem] -translate-x-1/2 -translate-y-1/2 rotate-[45deg] skew-x-[10deg] skew-y-[10deg] bg-slate-500"></div>
+            <div className="absolute left-[calc(100%/12*4)] top-1/2 h-[0.575rem] w-[0.575rem] -translate-x-1/2 -translate-y-1/2 rotate-[45deg] skew-x-[10deg] skew-y-[10deg] bg-slate-500 dark:bg-orange-100"></div>
+            <div className="absolute left-[calc(100%/12*9)] top-1/2 h-[0.575rem] w-[0.575rem] -translate-x-1/2 -translate-y-1/2 rotate-[45deg] skew-x-[10deg] skew-y-[10deg] bg-slate-500 dark:bg-orange-100"></div>
           </div>
 
           <form ref={formRef}>

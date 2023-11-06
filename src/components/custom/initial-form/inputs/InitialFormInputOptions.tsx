@@ -30,9 +30,9 @@ function InitialFormInputOptions({ name, options }: Props) {
           <div
             key={index}
             className={twMerge(
-              "relative flex w-full items-center gap-2 rounded-lg border-2 border-slate-900 px-4 py-2 transition duration-100 hover:bg-slate-50",
+              "relative flex w-full items-center gap-2 rounded-lg border border-slate-900 px-4 py-2 transition duration-100 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-800",
               formValues[name] === option.value &&
-                "bg-slate-900 text-slate-50 hover:bg-slate-900",
+                "bg-slate-900 text-slate-50 hover:bg-slate-900 dark:border-slate-700 dark:bg-slate-800",
             )}
           >
             <label
@@ -44,7 +44,7 @@ function InitialFormInputOptions({ name, options }: Props) {
               id={option.value + index.toString()}
               className={twMerge(
                 formValues[name] === option.value &&
-                  "border-slate-50 text-slate-50",
+                  "border-slate-50 text-slate-50 dark:border-slate-50 dark:text-slate-50",
               )}
             />
             <Label

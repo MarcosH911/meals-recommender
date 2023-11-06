@@ -8,6 +8,8 @@ Redirect after sign in/up/out
 
 Toaster provider to show toast from server
 
+Toast.error
+
 Insert weight form data to database
   From kg to lb
   Insert exercises
